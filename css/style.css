@@ -253,7 +253,11 @@
     --btn-bg: var(--c-forest);
     --btn-fg: var(--c-cream);
     --btn-bd: transparent;
+    --btn-hover-bg: var(--c-forest-3);
+    --btn-hover-fg: var(--btn-fg);
+    --btn-hover-bd: var(--btn-bd);
     position: relative;
+    isolation: isolate;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -276,40 +280,33 @@
       scale 0.3s var(--ease-out);
     -webkit-tap-highlight-color: transparent;
   }
+  /* Survol : la couleur de survol balaie le bouton de gauche à droite,
+     sous le libellé (z-index négatif dans le contexte isolé du bouton). */
+  .btn::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--btn-hover-bg);
+    clip-path: inset(0 100% 0 0 round var(--radius-pill));
+    transition: clip-path 0.55s var(--ease-out);
+  }
   .btn:active { scale: 0.97; }
   .btn--sm { min-height: 2.75rem; padding: 0 1.2rem; }
-  .btn--lime { --btn-bg: var(--c-lime); --btn-fg: var(--c-forest); }
-  .btn--cream { --btn-bg: var(--c-cream); --btn-fg: var(--c-forest); }
-  .btn--line { --btn-bg: transparent; --btn-fg: currentColor; --btn-bd: currentColor; }
-  .btn--line-light { --btn-bg: transparent; --btn-fg: var(--c-cream); --btn-bd: rgb(246 245 239 / 0.45); }
-  @media (hover: hover) {
-    .btn:hover { --btn-bg: var(--c-forest-3); }
-    .btn--lime:hover { --btn-bg: #e6f5a3; }
-    .btn--cream:hover { --btn-bg: #ffffff; }
-    .btn--line:hover { --btn-bg: var(--c-forest); --btn-fg: var(--c-cream); --btn-bd: var(--c-forest); }
-    .btn--line-light:hover { --btn-bg: var(--c-cream); --btn-fg: var(--c-forest); --btn-bd: var(--c-cream); }
+  .btn--lime { --btn-bg: var(--c-lime); --btn-fg: var(--c-forest); --btn-hover-bg: #e6f5a3; }
+  .btn--cream { --btn-bg: var(--c-cream); --btn-fg: var(--c-forest); --btn-hover-bg: #ffffff; }
+  .btn--line {
+    --btn-bg: transparent; --btn-fg: currentColor; --btn-bd: currentColor;
+    --btn-hover-bg: var(--c-forest); --btn-hover-fg: var(--c-cream); --btn-hover-bd: var(--c-forest);
   }
-
-  /* Libellé qui « roule » au survol : le second exemplaire est ignoré
-     par les lecteurs d'écran (texte alternatif vide). */
-  .btn__label {
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
-    padding-block: 0.15em;
-  }
-  .btn__label > span { display: inline-block; transition: transform 0.55s var(--ease-out); }
-  .btn__label::after {
-    content: attr(data-text) / "";
-    position: absolute;
-    left: 0;
-    top: 100%;
-    padding-block: 0.15em;
-    transition: transform 0.55s var(--ease-out);
+  .btn--line-light {
+    --btn-bg: transparent; --btn-fg: var(--c-cream); --btn-bd: rgb(246 245 239 / 0.45);
+    --btn-hover-bg: var(--c-cream); --btn-hover-fg: var(--c-forest); --btn-hover-bd: var(--c-cream);
   }
   @media (hover: hover) {
-    .btn:hover .btn__label > span,
-    .btn:hover .btn__label::after { transform: translateY(-100%); }
+    .btn:hover { color: var(--btn-hover-fg); border-color: var(--btn-hover-bd); }
+    .btn:hover::before { clip-path: inset(0 0 0 0 round var(--radius-pill)); }
   }
 
   /* -------------------------------------------------------------------
@@ -475,21 +472,9 @@
   .site-nav__link {
     position: relative;
     display: inline-flex;
-    overflow: hidden;
     font-size: var(--fs-s);
     font-weight: 500;
     line-height: 2.75rem;
-  }
-  .site-nav__link > span {
-    position: relative;
-    display: inline-block;
-    transition: transform 0.55s var(--ease-out);
-  }
-  .site-nav__link > span::after {
-    content: attr(data-text) / "";
-    position: absolute;
-    left: 0;
-    top: 100%;
   }
   .site-nav__link::before {
     content: "";
@@ -505,8 +490,9 @@
     transition: transform 0.4s var(--ease-out);
   }
   .site-nav__link[aria-current="location"]::before { transform: scale(1); }
+  /* Survol : le point de la section courante apparaît sous le lien. */
   @media (hover: hover) {
-    .site-nav__link:hover > span { transform: translateY(-100%); }
+    .site-nav__link:hover::before { transform: scale(1); }
   }
 
   .site-header__actions { display: flex; align-items: center; gap: 0.5rem; flex: none; }
@@ -695,7 +681,7 @@
     width: 100%;
     max-width: calc(var(--max) + 2 * var(--gutter));
     margin-inline: auto;
-    padding: calc(var(--header-h) + 3rem) var(--gutter) 0;
+    padding: calc(var(--header-h) + 3rem) var(--gutter) calc(clamp(2.5rem, 8vh, 4.5rem) + env(safe-area-inset-bottom));
   }
   .hero__intro {
     max-width: 34ch;
@@ -726,51 +712,6 @@
     margin-top: 2rem;
   }
 
-  .hero__bottom {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 2rem;
-    margin-top: clamp(2.25rem, 6vh, 4rem);
-    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
-  }
-  .hero__facts {
-    display: none;
-    color: rgb(246 245 239 / 0.82);
-    font-size: var(--fs-xs);
-    letter-spacing: 0.01em;
-  }
-  .hero__facts li + li { padding-left: 1.5rem; margin-left: 1.5rem; border-left: 1px solid rgb(246 245 239 / 0.28); }
-
-  .scroll-cue {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.6rem;
-    margin-left: auto;
-    color: rgb(246 245 239 / 0.85);
-    font-size: var(--fs-xs);
-  }
-  .scroll-cue__line {
-    position: relative;
-    width: 1px;
-    height: 3.25rem;
-    overflow: hidden;
-    background: rgb(246 245 239 / 0.28);
-  }
-  .scroll-cue__line::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: var(--c-lime);
-    transform: translateY(-100%);
-    animation: cue 2.4s var(--ease-in-out) infinite;
-  }
-  @keyframes cue {
-    0% { transform: translateY(-100%); }
-    55%, 100% { transform: translateY(100%); }
-  }
-
   /* Mobile et tablette : l'illustration occupe le haut de l'écran et se
      fond dans le vert forêt, le texte reste sur fond uni (contraste). */
   @media (max-width: 1023.98px) {
@@ -787,18 +728,12 @@
     }
   }
 
-  @media (min-width: 768px) {
-    .hero__facts { display: flex; }
-  }
-  /* Grand écran : texte calé sous l'en-tête, barre du bas en bas du hero */
+  /* Grand écran : texte calé sous l'en-tête */
   @media (min-width: 1024px) {
     .hero__layer {
-      display: flex;
       flex: 1;
-      flex-direction: column;
       padding-top: calc(var(--header-h) + 2rem);
     }
-    .hero__content { flex-grow: 1; }
   }
 
   /* États initiaux de la séquence d’arrivée : grand écran uniquement
@@ -1000,11 +935,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-  .about__demo {
-    position: absolute;
-    left: 1rem;
-    bottom: 1rem;
   }
   .about__detail {
     position: absolute;
