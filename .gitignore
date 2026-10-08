@@ -1,0 +1,13 @@
+# Artefacts Playwright MCP
+.playwright-mcp/
+
+# OS / éditeurs
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Divers
+*.log
+node_modules/

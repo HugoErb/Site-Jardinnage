@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="fr" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <!-- À PERSONNALISER : adaptez le titre et la description (nom de l’activité, communes). -->
+  <title>Jardinier paysagiste indépendant à Pau | Tonte, taille de haies, entretien de jardin</title>
+  <meta name="description" content="Jardinier indépendant à Pau et alentours : tonte de pelouse, taille de haies et d’arbustes, désherbage, débroussaillage, nettoyage et entretien régulier de jardins. Devis sur demande.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#102d24">
+  <meta name="color-scheme" content="light">
+
+  <!-- À ADAPTER si vous utilisez un nom de domaine personnalisé. -->
+  <link rel="canonical" href="https://hugoerb.github.io/Site-Jardinnage/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Jardinier paysagiste indépendant | Entretien de jardins">
+  <meta property="og:description" content="Tonte, taille, nettoyage et entretien de vos espaces verts. Un professionnel de proximité pour prendre soin de votre extérieur.">
+  <meta property="og:url" content="https://hugoerb.github.io/Site-Jardinnage/">
+  <meta property="og:image" content="https://hugoerb.github.io/Site-Jardinnage/assets/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Allée de pelouse tondue entre deux haies taillées">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+
+  <link rel="preload" href="assets/fonts/fraunces-roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/instrument-sans-roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="assets/images/hero/hero-3-jardin.svg" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/hero/hero-2-arbres.svg">
+
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    (function (d, w) {
+      var h = d.documentElement;
+      h.className = h.className.replace(/\bno-js\b/, 'js');
+      if (!(w.matchMedia && w.matchMedia('(prefers-reduced-motion: reduce)').matches)) h.classList.add('motion');
+      /* Connexion lente : si les scripts tardent, le hero s'affiche sans animation */
+      w.setTimeout(function () { if (!h.classList.contains('motion-ready')) h.classList.add('no-intro'); }, 1200);
+    })(document, window);
+  </script>
+  <style type="text/tailwindcss">
+    @theme inline {
+      --color-forest: var(--c-forest);
+      --color-forest-2: var(--c-forest-2);
+      --color-sage: var(--c-sage);
+      --color-cream: var(--c-cream);
+      --color-cream-2: var(--c-cream-2);
+      --color-lime: var(--c-lime);
+      --color-ink: var(--c-ink);
+      --color-moss: var(--c-moss);
+      --font-serif: var(--f-serif);
+      --font-sans: var(--f-sans);
+    }
+  </style>
+  <script defer src="js/vendor/gsap.min.js"></script>
+  <script defer src="js/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="js/vendor/SplitText.min.js"></script>
+  <script defer src="js/vendor/lenis.min.js"></script>
+  <script defer src="js/config.js"></script>
+  <script defer src="js/main.js"></script>
+  <script defer src="js/vendor/tailwindcss-browser.min.js"></script>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-mark" viewBox="0 0 32 32"><path d="M8.5 23.5C8.5 14.5 14.5 8.5 23.5 8.5C23.5 17.5 17.5 23.5 8.5 23.5Z" fill="currentColor" stroke="none"/><path d="M8.5 23.5L18.5 13.5" stroke="var(--mark-vein, #102d24)" stroke-width="1.6" stroke-linecap="round" fill="none"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-chevrons-left-right" viewBox="0 0 24 24"><path d="m9 7-5 5 5 5"/><path d="m15 7 5 5-5 5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20a10 10 0 0010-10 25.9 25.9 0 00-1.04-7.281 1 1 0 00-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0011 20"/><path d="M2 21a5 5 0 012.911-4.544C7.613 15.212 8.351 15.24 11 13"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></symbol>
+    <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-maximize-2" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="m21 3-7 7"/><path d="m3 21 7-7"/><path d="M9 21H3v-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></symbol>
+    <symbol id="i-rotate-ccw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
+    <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/><path d="M8.12 15.88 12 12"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <!-- =============================================================
+       En-tête et navigation
+       ============================================================= -->
+  <header class="site-header" data-header>
+    <div class="site-header__bar">
+      <a class="brand" href="#accueil">
+        <svg class="brand__mark" aria-hidden="true"><use href="#i-mark"/></svg>
+        <span class="brand__name" data-bind="business.name">Axel Royer</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Navigation principale">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="#accueil" data-nav><span data-text="Accueil">Accueil</span></a></li>
+          <li><a class="site-nav__link" href="#services" data-nav><span data-text="Services">Services</span></a></li>
+          <li><a class="site-nav__link" href="#a-propos" data-nav><span data-text="À propos">À propos</span></a></li>
+          <li><a class="site-nav__link" href="#contact" data-nav><span data-text="Contact">Contact</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="site-header__actions">
+        <a class="icon-btn" data-href="tel" href="tel:+33639980000" data-aria="Appeler le {contact.phone}" aria-label="Appeler le 06 39 98 00 00">
+          <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+        </a>
+        <a class="btn btn--lime btn--sm site-header__cta" href="#contact">
+          <span class="btn__label" data-text="Demander un devis"><span>Demander un devis</span></span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-mobile" data-menu-toggle>
+          <span class="visually-hidden" data-menu-label>Ouvrir le menu</span>
+          <span class="menu-toggle__lines" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+    <div class="site-header__cordeau" aria-hidden="true"><span data-progress></span></div>
+
+    <div class="menu-panel" id="menu-mobile" data-menu hidden>
+      <div class="menu-panel__inner">
+        <nav aria-label="Navigation principale">
+          <ul class="menu-panel__links">
+            <li><a href="#accueil" data-menu-link>Accueil</a></li>
+            <li><a href="#services" data-menu-link>Services</a></li>
+            <li><a href="#a-propos" data-menu-link>À propos</a></li>
+            <li><a href="#contact" data-menu-link>Contact</a></li>
+          </ul>
+        </nav>
+        <div class="menu-panel__contact">
+          <a class="menu-panel__phone" data-href="tel" href="tel:+33639980000">
+            <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+            <span data-bind="contact.phone">06 39 98 00 00</span>
+          </a>
+          <a class="menu-panel__mail" data-href="mailto" href="mailto:contact@example.com">
+            <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
+            <span data-bind="contact.email">contact@example.com</span>
+          </a>
+          <p class="menu-panel__zone">Je me déplace à <span data-bind="zone.city">Pau</span> et dans les communes voisines.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenu" tabindex="-1">
+
+    <!-- =============================================================
+         Hero
+         ============================================================= -->
+    <section class="hero" id="accueil" aria-labelledby="hero-title" data-header-theme="dark">
+      <!-- Illustration originale en 4 calques (parallaxe). Pour une photo, voir README. -->
+      <div class="hero__media" data-hero-media>
+        <div class="hero__scene" data-hero-scene>
+          <img class="hero__plane" data-depth="0.12" src="assets/images/hero/hero-1-ciel.svg" width="1600" height="1000" alt="" decoding="async">
+          <img class="hero__plane" data-depth="0.3" src="assets/images/hero/hero-2-arbres.svg" width="1600" height="1000" alt="" decoding="async">
+          <img class="hero__plane" data-depth="0.6" src="assets/images/hero/hero-3-jardin.svg" width="1600" height="1000" alt="Illustration : jardin soigné au soleil, avec piscine, terrasse dallée et transats, pelouse tondue, arbres et arbustes taillés" fetchpriority="high" decoding="async">
+          <img class="hero__plane" data-depth="1" src="assets/images/hero/hero-4-premier-plan.svg" width="1600" height="1000" alt="" decoding="async">
+        </div>
+      </div>
+      <div class="hero__shade" aria-hidden="true"></div>
+      <span class="hero__cut" aria-hidden="true" data-hero-cut></span>
+
+      <div class="hero__layer" data-hero-layer>
+        <div class="hero__content">
+          <p class="hero__intro" data-hero-item>Jardinier paysagiste indépendant à <span data-bind="zone.city">Pau</span> et dans les communes voisines</p>
+          <h1 class="hero__title" id="hero-title" data-hero-title>
+            <span class="hero__line">Votre jardin</span>
+            <span class="hero__line">mérite toute</span>
+            <span class="hero__line">mon attention.</span>
+          </h1>
+          <p class="hero__lead" data-hero-item>Tonte, taille, nettoyage et entretien de vos espaces verts. Un professionnel de proximité pour prendre soin de votre extérieur.</p>
+          <div class="hero__actions" data-hero-item>
+            <a class="btn btn--lime" href="#contact"><span class="btn__label" data-text="Demander un devis"><span>Demander un devis</span></span></a>
+            <a class="btn btn--line-light" href="#services"><span class="btn__label" data-text="Découvrir les prestations"><span>Découvrir les prestations</span></span></a>
+          </div>
+        </div>
+
+        <div class="hero__bottom" data-hero-item>
+          <ul class="hero__facts">
+            <li>Un seul interlocuteur</li>
+            <li>Visite de votre jardin</li>
+            <li>Interventions ponctuelles ou régulières</li>
+          </ul>
+          <a class="scroll-cue" href="#services">
+            <span class="scroll-cue__line" aria-hidden="true"></span>
+            <span>Défiler</span>
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =============================================================
+         Prestations
+         ============================================================= -->
+    <section class="section services" id="services" aria-labelledby="services-title" data-header-theme="light">
+      <div class="container services__grid">
+        <div class="services__intro">
+          <h2 class="t-h2" id="services-title" data-split>Chaque jardin mérite le bon geste.</h2>
+          <p class="t-lead mt-6">Ponctuellement ou tout au long de l’année, j’entretiens votre jardin avec le même soin du détail. Voici ce que je peux faire pour vous.</p>
+          <a class="btn mt-8" href="#contact"><span class="btn__label" data-text="Demander un devis"><span>Demander un devis</span></span></a>
+
+          <div class="services__all">
+            <h3 class="services__all-title">Toutes les prestations</h3>
+            <ul class="services__all-list">
+              <li>Tonte de pelouse</li>
+              <li>Taille de haies</li>
+              <li>Taille d’arbustes</li>
+              <li>Désherbage</li>
+              <li>Débroussaillage</li>
+              <li>Nettoyage de jardins</li>
+              <li>Ramassage de feuilles</li>
+              <li>Entretien régulier des espaces verts</li>
+              <li>Remise en état de jardins négligés</li>
+              <li>Petits travaux d’entretien extérieur</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="services__cards">
+          <div class="services__col">
+            <article class="service-card" aria-labelledby="svc-tonte" data-order="1">
+              <div class="service-card__media" data-reveal="image">
+                <img src="assets/images/illus-service-tonte.svg" width="800" height="1000" loading="lazy" decoding="async"
+                     alt="Illustration : tondeuse traçant des bandes nettes dans une pelouse">
+                <span class="tag service-card__tag">Ponctuel ou régulier</span>
+              </div>
+              <div class="service-card__body" data-reveal="up">
+                <h3 class="t-h3" id="svc-tonte">Tonte et entretien des pelouses</h3>
+                <p>Tonte soignée et finition des bordures, ponctuellement ou à intervalles réguliers pendant la saison.</p>
+                <a class="link link--always" href="#contact" data-service="tonte">Demander un devis pour la tonte</a>
+              </div>
+            </article>
+
+            <article class="service-card" aria-labelledby="svc-nettoyage" data-order="3">
+              <div class="service-card__media" data-reveal="image">
+                <img src="assets/images/illus-service-nettoyage.svg" width="800" height="1000" loading="lazy" decoding="async"
+                     alt="Illustration : feuilles mortes ratissées en tas sur une pelouse">
+                <span class="tag service-card__tag">Ponctuel</span>
+              </div>
+              <div class="service-card__body" data-reveal="up">
+                <h3 class="t-h3" id="svc-nettoyage">Nettoyage et remise en état</h3>
+                <p>Feuilles, branches, massifs envahis&#8239;: je remets de l’ordre, y compris dans un jardin laissé de côté depuis longtemps.</p>
+                <a class="link link--always" href="#contact" data-service="nettoyage">Demander un devis pour un nettoyage</a>
+              </div>
+            </article>
+
+            <article class="service-card service-card--forest" aria-labelledby="svc-entretien" data-order="5">
+              <div class="service-card__media" data-reveal="image">
+                <img src="assets/images/illus-service-entretien.svg" width="800" height="1000" loading="lazy" decoding="async"
+                     alt="Illustration : un arbre au fil des quatre saisons">
+                <span class="tag tag--lime service-card__tag">Régulier</span>
+              </div>
+              <div class="service-card__body" data-reveal="up">
+                <h3 class="t-h3" id="svc-entretien">Entretien régulier</h3>
+                <p>Des passages planifiés au fil des saisons pour garder un jardin soigné toute l’année, sans avoir à y penser.</p>
+                <a class="link link--always" href="#contact" data-service="entretien">Demander un devis pour un entretien régulier</a>
+              </div>
+            </article>
+          </div>
+
+          <div class="services__col services__col--offset" data-col-depth>
+            <article class="service-card" aria-labelledby="svc-haies" data-order="2">
+              <div class="service-card__media" data-reveal="image">
+                <img src="assets/images/illus-service-haies.svg" width="800" height="1000" loading="lazy" decoding="async"
+                     alt="Illustration : arbuste taillé en cône, à moitié taillé">
+                <span class="tag service-card__tag">Selon la saison</span>
+              </div>
+              <div class="service-card__body" data-reveal="up">
+                <h3 class="t-h3" id="svc-haies">Taille de haies et d’arbustes</h3>
+                <p>Taille de formation ou d’entretien, au bon moment de l’année, pour des haies nettes et des arbustes en bonne santé.</p>
+                <a class="link link--always" href="#contact" data-service="haies">Demander un devis pour la taille</a>
+              </div>
+            </article>
+
+            <article class="service-card" aria-labelledby="svc-desherbage" data-order="4">
+              <div class="service-card__media" data-reveal="image">
+                <img src="assets/images/illus-service-desherbage.svg" width="800" height="1000" loading="lazy" decoding="async"
+                     alt="Illustration : débroussailleuse attaquant une friche, fourche et mauvaises herbes arrachées devant un massif net">
+                <span class="tag service-card__tag">Ponctuel</span>
+              </div>
+              <div class="service-card__body" data-reveal="up">
+                <h3 class="t-h3" id="svc-desherbage">Désherbage et débroussaillage</h3>
+                <p>Allées, massifs, terrains en friche&#8239;: je dégage ce qui a pris le dessus, à la main ou à la débroussailleuse.</p>
+                <a class="link link--always" href="#contact" data-service="desherbage">Demander un devis pour le désherbage</a>
+              </div>
+            </article>
+
+            <article class="service-card" aria-labelledby="svc-travaux" data-order="6">
+              <div class="service-card__media" data-reveal="image">
+                <img src="assets/images/illus-service-travaux.svg" width="800" height="1000" loading="lazy" decoding="async"
+                     alt="Illustration : transplantoir, fourche à main et sécateur">
+                <span class="tag service-card__tag">Ponctuel</span>
+              </div>
+              <div class="service-card__body" data-reveal="up">
+                <h3 class="t-h3" id="svc-travaux">Petits travaux de jardinage</h3>
+                <p>Ramassage de feuilles et petits travaux d’entretien extérieur&#8239;: les finitions qui changent l’allure d’un jardin.</p>
+                <a class="link link--always" href="#contact" data-service="travaux">Demander un devis pour de petits travaux</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================================
+         À propos
+         ============================================================= -->
+    <section class="section section--cream2 about" id="a-propos" aria-labelledby="about-title" data-header-theme="light">
+      <div class="container about__grid">
+        <div class="about__visual">
+          <!-- Remplacez ces illustrations par vos photos (voir README, « Remplacer les visuels »). -->
+          <figure class="about__portrait" data-reveal="image">
+            <img src="assets/images/illus-arche.svg" width="1080" height="1350" loading="lazy" decoding="async"
+                 alt="Illustration : un jardin entretenu vu à travers une arche taillée dans une haie">
+            <figcaption class="tag tag--cream2 about__demo" data-demo-label>Illustration</figcaption>
+          </figure>
+          <figure class="about__detail" data-reveal="image">
+            <img src="assets/images/illus-topiaire.svg" width="560" height="560" loading="lazy" decoding="async"
+                 alt="Illustration : petit arbuste taillé en boule dans un pot">
+          </figure>
+        </div>
+
+        <div class="about__text">
+          <h2 class="t-h2 t-h2--wide" id="about-title" data-split>Un seul interlocuteur, du premier appel au dernier coup de sécateur.</h2>
+          <p class="about__hello">Bonjour, je suis <span data-bind="person.firstName">Axel</span>.</p>
+          <div class="about__body t-body">
+            <p>Jardinier indépendant, j’interviens chez les particuliers de <span data-bind="zone.city">Pau</span> et des environs pour l’entretien de leurs jardins et de leurs espaces verts.</p>
+            <p>Je travaille seul, et c’est un choix&#8239;: c’est moi que vous avez au téléphone, moi qui viens voir votre jardin, moi qui réalise le travail. Vous savez toujours à qui vous adresser.</p>
+            <p>Avant toute intervention, je me déplace pour comprendre votre terrain et vos attentes. Ce qui compte pour moi&nbsp;: un travail minutieux, des finitions nettes et une relation de confiance qui dure.</p>
+          </div>
+
+          <dl class="commitments">
+            <div class="commitment" data-reveal="line"><dt>Un interlocuteur unique</dt><dd>Pas d’intermédiaire, pas d’équipe qui change d’une fois sur l’autre.</dd></div>
+            <div class="commitment" data-reveal="line"><dt>Une visite de votre jardin</dt><dd>Je viens sur place avant de vous proposer quoi que ce soit.</dd></div>
+            <div class="commitment" data-reveal="line"><dt>Une intervention personnalisée</dt><dd>Le travail s’adapte à votre terrain, à la saison et à ce que vous souhaitez.</dd></div>
+            <div class="commitment" data-reveal="line"><dt>Un travail minutieux</dt><dd>Des coupes propres, des bordures nettes, un jardin laissé en ordre.</dd></div>
+            <div class="commitment" data-reveal="line"><dt>Une relation de proximité</dt><dd>Un professionnel du secteur, facile à joindre.</dd></div>
+          </dl>
+
+          <div class="about__actions">
+            <a class="btn" href="#contact"><span class="btn__label" data-text="Parlons de votre jardin"><span>Parlons de votre jardin</span></span></a>
+            <a class="about__phone link link--always" data-href="tel" href="tel:+33639980000">
+              <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+              <span data-bind="contact.phone">06 39 98 00 00</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================================
+         Déroulement d'une intervention
+         ============================================================= -->
+    <section class="section process" id="methode" aria-labelledby="process-title" data-header-theme="light">
+      <div class="container">
+        <div class="process__head">
+          <h2 class="t-h2" id="process-title" data-split>Comment se déroule une intervention&#8239;?</h2>
+          <p class="t-lead t-muted">Quatre étapes simples, du premier échange à l’entretien dans la durée.</p>
+        </div>
+
+        <div class="process__timeline" data-process>
+          <svg class="process__stem" aria-hidden="true" data-process-stem>
+            <path class="process__stem-base" data-stem-base/>
+            <path class="process__stem-grow" data-stem-grow/>
+          </svg>
+          <ol class="process__steps">
+            <li class="step" data-step>
+              <span class="step__num" aria-hidden="true">1</span>
+              <div class="step__body">
+                <h3 class="t-h3">Premier contact</h3>
+                <p>Vous m’appelez ou m’écrivez. Nous échangeons quelques minutes sur votre jardin et sur ce que vous attendez.</p>
+                <span class="tag tag--cream2 step__tag">Téléphone, e-mail ou formulaire</span>
+              </div>
+            </li>
+            <li class="step" data-step>
+              <span class="step__num" aria-hidden="true">2</span>
+              <div class="step__body">
+                <h3 class="t-h3">Visite et évaluation du jardin</h3>
+                <p>Je me déplace chez vous pour voir le terrain, les accès, l’état des haies, des massifs et de la pelouse.</p>
+                <span class="tag tag--cream2 step__tag">Sur rendez-vous, chez vous</span>
+              </div>
+            </li>
+            <li class="step" data-step>
+              <span class="step__num" aria-hidden="true">3</span>
+              <div class="step__body">
+                <h3 class="t-h3">Proposition adaptée</h3>
+                <p>Je vous propose une intervention adaptée, ponctuelle ou régulière, avec un devis clair et détaillé.</p>
+                <span class="tag tag--cream2 step__tag">Ponctuelle ou régulière</span>
+              </div>
+            </li>
+            <li class="step" data-step>
+              <span class="step__num" aria-hidden="true">4</span>
+              <div class="step__body">
+                <h3 class="t-h3">Intervention et entretien</h3>
+                <p>Je réalise le travail avec soin. Si vous le souhaitez, nous prévoyons ensuite des passages réguliers au fil des saisons.</p>
+                <span class="tag tag--cream2 step__tag">Au fil des saisons</span>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================================
+         Contact
+         ============================================================= -->
+    <section class="section section--dark contact" id="contact" aria-labelledby="contact-title" data-header-theme="dark">
+      <div class="container">
+        <div class="contact__grid">
+          <div class="contact__direct">
+            <h2 class="contact__title" id="contact-title" data-split>Et si on redonnait vie à votre jardin&#8239;?</h2>
+
+            <p class="t-lead t-muted">Le plus simple est de m’appeler. Vous pouvez aussi m’écrire ou remplir le formulaire&nbsp;: je vous recontacte pour convenir d’une visite.</p>
+
+            <a class="contact-line" data-href="tel" href="tel:+33639980000">
+              <span class="contact-line__icon" aria-hidden="true"><svg class="icon"><use href="#i-phone"/></svg></span>
+              <span class="contact-line__text">
+                <span class="contact-line__label">Appeler <span data-bind="person.firstName">Axel</span></span>
+                <span class="contact-line__value" data-bind="contact.phone">06 39 98 00 00</span>
+              </span>
+            </a>
+            <a class="contact-line" data-href="mailto" href="mailto:contact@example.com">
+              <span class="contact-line__icon" aria-hidden="true"><svg class="icon"><use href="#i-mail"/></svg></span>
+              <span class="contact-line__text">
+                <span class="contact-line__label">Écrire un e-mail</span>
+                <span class="contact-line__value contact-line__value--mail" data-bind="contact.email">contact@example.com</span>
+              </span>
+            </a>
+
+            <dl class="contact__infos">
+              <div>
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg>Secteur</dt>
+                <dd><span data-bind="zone.city">Pau</span> et communes voisines</dd>
+              </div>
+              <div data-if="hours">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Horaires</dt>
+                <dd>
+                  <ul class="contact__hours" data-list="hours">
+                    <template><li><span data-item="days"></span>&nbsp;: <span data-item="time"></span></li></template>
+                    <li>Jours et horaires&nbsp;: à compléter</li>
+                  </ul>
+                </dd>
+              </div>
+            </dl>
+
+            <ul class="contact__social" data-if="social" data-prune hidden>
+              <li data-if="social.instagram" data-prune hidden><a class="link link--always" data-href="social.instagram" target="_blank" rel="noopener">Instagram</a></li>
+              <li data-if="social.facebook" data-prune hidden><a class="link link--always" data-href="social.facebook" target="_blank" rel="noopener">Facebook</a></li>
+              <li data-if="social.linkedin" data-prune hidden><a class="link link--always" data-href="social.linkedin" target="_blank" rel="noopener">LinkedIn</a></li>
+              <li data-if="social.google" data-prune hidden><a class="link link--always" data-href="social.google" target="_blank" rel="noopener">Avis Google</a></li>
+            </ul>
+          </div>
+
+          <div class="contact__form-wrap">
+            <form class="quote-form" data-quote-form novalidate aria-labelledby="quote-title">
+              <h3 class="quote-form__title" id="quote-title">Demande de devis</h3>
+              <p class="quote-form__hint">Les champs marqués d’un astérisque (*) sont obligatoires.</p>
+
+              <div class="field">
+                <input class="field__input" id="f-name" name="name" type="text" autocomplete="name" required placeholder=" " aria-describedby="f-name-error">
+                <label class="field__label" for="f-name">Nom *</label>
+                <p class="field__error" id="f-name-error"></p>
+              </div>
+              <div class="field">
+                <input class="field__input" id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder=" " aria-describedby="f-email-error">
+                <label class="field__label" for="f-email">E-mail *</label>
+                <p class="field__error" id="f-email-error"></p>
+              </div>
+              <div class="field">
+                <input class="field__input" id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder=" " aria-describedby="f-phone-error">
+                <label class="field__label" for="f-phone">Téléphone</label>
+                <p class="field__error" id="f-phone-error"></p>
+              </div>
+              <div class="field field--select">
+                <select class="field__input" id="f-service" name="service">
+                  <option value="tonte">Tonte et entretien des pelouses</option>
+                  <option value="haies">Taille de haies et d’arbustes</option>
+                  <option value="nettoyage">Nettoyage et remise en état</option>
+                  <option value="desherbage">Désherbage et débroussaillage</option>
+                  <option value="entretien">Entretien régulier</option>
+                  <option value="travaux">Petits travaux de jardinage</option>
+                  <option value="autre" selected>Autre, ou je ne sais pas encore</option>
+                </select>
+                <label class="field__label" for="f-service">Type de prestation</label>
+              </div>
+              <div class="field">
+                <textarea class="field__input" id="f-message" name="message" rows="5" required placeholder=" " aria-describedby="f-message-help f-message-error"></textarea>
+                <label class="field__label" for="f-message">Message *</label>
+                <p class="field__help" id="f-message-help">Par exemple&nbsp;: surface approximative, travaux souhaités, fréquence.</p>
+                <p class="field__error" id="f-message-error"></p>
+              </div>
+
+              <div class="quote-form__submit">
+                <button type="submit" class="btn">
+                  <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
+                  <span>Préparer l’e-mail</span>
+                </button>
+                <p class="quote-form__note">Votre messagerie s’ouvrira avec la demande pré-remplie. Elle me sera transmise lorsque vous l’enverrez.</p>
+              </div>
+
+              <div class="quote-form__status" role="status" data-form-status></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =============================================================
+       Pied de page
+       ============================================================= -->
+  <footer class="site-footer" data-header-theme="dark">
+    <div class="container">
+      <div class="footer__top">
+        <p class="footer__cta">Un jardin à entretenir&#8239;? Parlons-en.</p>
+        <div class="footer__actions">
+          <a class="btn btn--lime" data-href="tel" href="tel:+33639980000">
+            <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+            <span data-bind="contact.phone">06 39 98 00 00</span>
+          </a>
+          <a class="btn btn--line-light" href="#contact"><span class="btn__label" data-text="Demander un devis"><span>Demander un devis</span></span></a>
+        </div>
+      </div>
+
+      <div class="footer__grid">
+        <div class="footer__about">
+          <a class="brand brand--footer" href="#accueil">
+            <svg class="brand__mark" aria-hidden="true"><use href="#i-mark"/></svg>
+            <span class="brand__name" data-bind="business.name">Axel Royer</span>
+          </a>
+          <p class="t-small t-muted">Jardinier paysagiste indépendant&nbsp;: tonte, taille, nettoyage et entretien de jardins chez les particuliers, à <span data-bind="zone.city">Pau</span> et dans les environs.</p>
+        </div>
+
+        <nav class="footer__col" aria-label="Navigation secondaire">
+          <h2 class="footer__title">Navigation</h2>
+          <ul>
+            <li><a class="link" href="#services">Services</a></li>
+            <li><a class="link" href="#a-propos">À propos</a></li>
+            <li><a class="link" href="#methode">Déroulement</a></li>
+            <li><a class="link" href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer__col">
+          <h2 class="footer__title">Coordonnées</h2>
+          <ul>
+            <li><a class="link" data-href="tel" href="tel:+33639980000" data-bind="contact.phone">06 39 98 00 00</a></li>
+            <li><a class="link" data-href="mailto" href="mailto:contact@example.com" data-bind="contact.email">contact@example.com</a></li>
+            <li><span data-bind="zone.city">Pau</span> et communes voisines</li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h2 class="footer__title">Informations</h2>
+          <ul>
+            <li><a class="link" href="mentions-legales.html">Mentions légales</a></li>
+            <li><a class="link" href="confidentialite.html">Politique de confidentialité</a></li>
+            <li><a class="link" href="mentions-legales.html#credits">Crédits photos</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p>© <span data-year>2026</span> <span data-bind="business.name">Axel Royer</span>. Tous droits réservés.</p>
+        <a class="back-top" href="#accueil">
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg>
+          <span>Haut de page</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Contact rapide sur mobile -->
+  <div class="dock" data-dock>
+    <a class="dock__btn" data-href="tel" href="tel:+33639980000">
+      <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+      <span>Appeler</span>
+    </a>
+    <a class="dock__btn dock__btn--lime" href="#contact">Demander un devis</a>
+  </div>
+
+  <!-- Visionneuse de la galerie -->
+
+  <span class="hidden" data-tw-probe></span>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="fr" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mentions légales | Jardinier paysagiste indépendant à Pau</title>
+  <meta name="description" content="Mentions légales du site : éditeur, hébergement, médiation de la consommation, propriété intellectuelle et crédits.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#102d24">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/fraunces-roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/instrument-sans-roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    (function (d) { d.documentElement.className = d.documentElement.className.replace(/\bno-js\b/, 'js'); })(document);
+  </script>
+  <style type="text/tailwindcss">
+    @theme inline {
+      --color-forest: var(--c-forest);
+      --color-forest-2: var(--c-forest-2);
+      --color-sage: var(--c-sage);
+      --color-cream: var(--c-cream);
+      --color-cream-2: var(--c-cream-2);
+      --color-lime: var(--c-lime);
+      --color-ink: var(--c-ink);
+      --color-moss: var(--c-moss);
+      --font-serif: var(--f-serif);
+      --font-sans: var(--f-sans);
+    }
+  </style>
+  <script defer src="js/vendor/tailwindcss-browser.min.js"></script>
+  <script defer src="js/config.js"></script>
+  <script defer src="js/main.js"></script>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-mark" viewBox="0 0 32 32"><path d="M8.5 23.5C8.5 14.5 14.5 8.5 23.5 8.5C23.5 17.5 17.5 23.5 8.5 23.5Z" fill="currentColor" stroke="none"/><path d="M8.5 23.5L18.5 13.5" stroke="var(--mark-vein, #102d24)" stroke-width="1.6" stroke-linecap="round" fill="none"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <header class="site-header site-header--solid" data-header>
+    <div class="site-header__bar">
+      <a class="brand" href="index.html">
+        <svg class="brand__mark" aria-hidden="true"><use href="#i-mark"/></svg>
+        <span class="brand__name" data-bind="business.name">Axel Royer</span>
+      </a>
+      <div class="site-header__actions">
+        <a class="legal-back link link--always" href="index.html">Retour au site</a>
+        <a class="icon-btn" data-href="tel" href="tel:+33639980000" data-aria="Appeler le {contact.phone}" aria-label="Appeler le 06 39 98 00 00">
+          <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+        </a>
+        <a class="btn btn--lime btn--sm site-header__cta" href="index.html#contact"><span class="btn__label" data-text="Demander un devis"><span>Demander un devis</span></span></a>
+      </div>
+    </div>
+    <div class="site-header__cordeau" aria-hidden="true"><span data-progress></span></div>
+  </header>
+
+  <main id="contenu" tabindex="-1" class="legal" data-header-theme="light">
+    <div class="container">
+      <article class="legal__article">
+        <h1 class="legal__title">Mentions légales</h1>
+        <p class="legal__intro">Conformément à la loi pour la confiance dans l’économie numérique (loi n°&nbsp;2004-575 du 21&nbsp;juin 2004), voici les informations relatives à l’éditeur et à l’hébergeur de ce site. Les éléments entre crochets sont à compléter.</p>
+
+        <section aria-labelledby="ml-editeur">
+          <h2 id="ml-editeur">Éditeur du site</h2>
+          <dl class="legal__list">
+            <div><dt>Activité</dt><dd data-bind="business.name">Axel Royer</dd></div>
+            <div><dt>Exploitant</dt><dd data-bind="legal.ownerName">Axel Royer</dd></div>
+            <div><dt>Statut</dt><dd data-bind="legal.status">Entrepreneur individuel (EI)</dd></div>
+            <div><dt>Adresse</dt><dd data-bind="legal.address">[Adresse postale]</dd></div>
+            <div><dt>SIRET</dt><dd data-bind="legal.siret">[Numéro SIRET]</dd></div>
+            <div data-if="legal.vat" hidden><dt>TVA intracommunautaire</dt><dd data-bind="legal.vat"></dd></div>
+            <div><dt>Téléphone</dt><dd><a class="link link--always" data-href="tel" href="tel:+33639980000" data-bind="contact.phone">06 39 98 00 00</a></dd></div>
+            <div><dt>E-mail</dt><dd><a class="link link--always" data-href="mailto" href="mailto:contact@example.com" data-bind="contact.email">contact@example.com</a></dd></div>
+          </dl>
+        </section>
+
+        <section aria-labelledby="ml-publication">
+          <h2 id="ml-publication">Directeur de la publication</h2>
+          <p><span data-bind="legal.ownerName">Axel Royer</span>, en qualité d’exploitant de l’activité.</p>
+        </section>
+
+        <section aria-labelledby="ml-hebergement">
+          <h2 id="ml-hebergement">Hébergement</h2>
+          <p>
+            <span data-bind="legal.host.name">GitHub, Inc.</span><br>
+            <span data-bind="legal.host.address">88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis</span><br>
+            <a class="link link--always" data-href="legal.host.url" href="https://github.com" target="_blank" rel="noopener">Site de l’hébergeur</a>
+          </p>
+        </section>
+
+        <section aria-labelledby="ml-mediation">
+          <h2 id="ml-mediation">Médiation de la consommation</h2>
+          <p>Conformément au Code de la consommation, en cas de litige non résolu à l’amiable, le client consommateur peut recourir gratuitement au médiateur de la consommation suivant&nbsp;: <span data-bind="legal.mediator.name">[Nom et coordonnées du médiateur de la consommation]</span><span data-if="legal.mediator.url" hidden> (<a class="link link--always" data-href="legal.mediator.url" target="_blank" rel="noopener">site du médiateur</a>)</span>.</p>
+        </section>
+
+        <section aria-labelledby="ml-propriete">
+          <h2 id="ml-propriete">Propriété intellectuelle</h2>
+          <p>Les textes, illustrations et éléments graphiques de ce site sont protégés par le droit d’auteur. Toute reproduction ou représentation, totale ou partielle, sans autorisation préalable est interdite, sauf mention contraire indiquée dans les crédits ci-dessous.</p>
+        </section>
+
+        <section id="credits" aria-labelledby="credits-title">
+          <h2 id="credits-title">Crédits</h2>
+          <ul class="legal__bullets">
+            <li><strong>Illustrations</strong>&nbsp;: créations originales réalisées pour ce site. Elles seront remplacées par les photos des chantiers de l’entreprise.</li>
+            <li><strong>Polices</strong>&nbsp;: Fraunces et Instrument Sans, sous licence SIL Open Font License 1.1, hébergées avec le site.</li>
+            <li><strong>Icônes</strong>&nbsp;: Lucide, sous licence ISC.</li>
+            <li><strong>Bibliothèques</strong>&nbsp;: GSAP (licence standard GSAP), Lenis (MIT), Tailwind CSS (MIT), hébergées avec le site.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="ml-responsabilite">
+          <h2 id="ml-responsabilite">Responsabilité</h2>
+          <p>Les informations de ce site sont données à titre indicatif. Malgré le soin apporté à leur rédaction, elles peuvent comporter des inexactitudes&nbsp;: n’hésitez pas à les signaler. Le détail et le prix de chaque prestation sont précisés dans le devis remis après la visite du jardin.</p>
+        </section>
+
+        <section aria-labelledby="ml-donnees">
+          <h2 id="ml-donnees">Données personnelles</h2>
+          <p>Ce site ne dépose aucun cookie et ne collecte aucune donnée de manière automatique. Pour en savoir plus, consultez la <a class="link link--always" href="confidentialite.html">politique de confidentialité</a>.</p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer site-footer--compact">
+    <div class="container">
+      <div class="footer__bottom">
+        <p>© <span data-year>2026</span> <span data-bind="business.name">Axel Royer</span>. Tous droits réservés.</p>
+        <nav class="footer__legal" aria-label="Liens utiles">
+          <a class="link" href="index.html">Accueil</a>
+          <a class="link" href="index.html#contact">Contact</a>
+          <a class="link" href="mentions-legales.html" aria-current="page">Mentions légales</a>
+          <a class="link" href="confidentialite.html">Confidentialité</a>
+        </nav>
+        <a class="back-top" href="#contenu">
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg>
+          <span>Haut de page</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <span class="hidden" data-tw-probe></span>
+</body>
+</html>
