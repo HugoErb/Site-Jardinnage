@@ -116,7 +116,6 @@ Le site n’a pas de serveur : le formulaire **n’envoie rien lui-même**. Quan
 
 - Les champs Nom, E-mail et Message sont vérifiés avant l’ouverture de la messagerie.
 - Si aucune messagerie ne s’ouvre (ordinateur sans logiciel de messagerie configuré), le visiteur peut **copier sa demande** en un clic ou appeler directement.
-- Les liens « Demander un devis pour… » des cartes de prestations présélectionnent la prestation.
 - Aucune donnée ne transite par un service tiers.
 
 ---

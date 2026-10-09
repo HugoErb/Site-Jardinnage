@@ -709,7 +709,8 @@
   /* Mobile et tablette : l'illustration occupe le haut de l'écran et se
      fond dans le vert forêt, le texte reste sur fond uni (contraste). */
   @media (max-width: 1023.98px) {
-    .hero__scene { inset: -7% 0 auto; height: 62%; }
+    /* overflow : les calques en parallaxe restent sous le fondu au scroll */
+    .hero__scene { inset: -7% 0 auto; height: 62%; overflow: hidden; }
     .hero__intro,
     .hero__title { text-shadow: 0 1px 18px rgb(16 45 36 / 0.85); }
     .hero__plane { object-position: 64% 50%; }
@@ -841,37 +842,15 @@
     color: var(--c-moss);
     font-size: var(--fs-s);
   }
-  .service-card .link {
-    justify-self: start;
-    margin-top: 0.35rem;
-    font-size: var(--fs-s);
-  }
-  /* Toute la carte mène au formulaire, via le lien de la carte */
-  .service-card .link::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-  }
-  .service-card:has(.link:focus-visible) {
-    outline: 2px solid var(--focus);
-    outline-offset: 3px;
-  }
-  .service-card .link:focus-visible { outline: none; }
-
   .service-card--forest {
     --card-bg: var(--c-forest);
-    --focus: var(--c-lime);
     color: var(--c-cream);
   }
   .service-card--forest .service-card__body p { color: rgb(246 245 239 / 0.76); }
 
   @media (hover: hover) {
-    .service-card:hover { --card-bg: #e3e2d6; }
-    .service-card--forest:hover { --card-bg: var(--c-forest-2); }
     .service-card:hover .service-card__media img { transform: scale(1.06); }
     .service-card:hover .service-card__tag { transform: rotate(-8deg); }
-    .service-card:hover .link { background-size: 0% 1px; background-position: 100% 100%; }
   }
 
   /* Mobile : une seule colonne, dans l'ordre de priorité des prestations */
@@ -1244,9 +1223,9 @@
   .contact__communes {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.15rem 0;
+    gap: 0.15rem 0.3em;
   }
-  .contact__communes li:not(:last-child)::after { content: ", "; }
+  .contact__communes li:not(:last-child)::after { content: ","; }
   .contact__social {
     display: flex;
     flex-wrap: wrap;
@@ -1312,7 +1291,6 @@
     background-repeat: no-repeat;
     cursor: pointer;
   }
-  .field--select .field__input.is-highlight { box-shadow: 0 0 0 4px rgb(216 236 132 / 0.9); }
   .field__error { margin-top: 0.35rem; color: #9b3b2a; font-size: var(--fs-xs); font-weight: 560; }
   .field__error:empty { display: none; }
   .field__help { margin-top: 0.35rem; color: var(--c-moss); font-size: var(--fs-xs); }

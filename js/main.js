@@ -889,17 +889,6 @@
       renderStatus(mail, mail.href.length > 1800);
       if (mail.to) window.location.href = mail.href;
     });
-
-    /* Les liens « Demander un devis pour… » préremplissent la prestation */
-    $$('[data-service]').forEach(function (link) {
-      link.addEventListener('click', function () {
-        var select = f.service;
-        if (!select || !$('option[value="' + link.dataset.service + '"]', select)) return;
-        select.value = link.dataset.service;
-        select.classList.add('is-highlight');
-        setTimeout(function () { select.classList.remove('is-highlight'); }, 1800);
-      });
-    });
   }
 
   /* ===================================================================
