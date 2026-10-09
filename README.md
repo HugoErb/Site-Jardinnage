@@ -103,8 +103,7 @@ Puis, dans `index.html`, remplacez le `src` de l’image concernée et adaptez s
 |---|---|---|
 | Hero (grande image d’accueil) | `hero/hero-1-ciel.svg` … `hero-4-premier-plan.svg` (4 calques) | Une photo paysage 1920 × 1080 : remplacez les 4 `<img class="hero__plane">` par une seule (gardez la classe `hero__plane`) |
 | Cartes des prestations (×6) | `illus-service-*.svg` | Portrait 800 × 1000 |
-| À propos (portrait) | `illus-arche.svg` | **Votre photo**, portrait 1080 × 1350 |
-| À propos (médaillon) | `illus-topiaire.svg` | Carré 560 × 560 |
+| À propos | Scène animée (tondeuse, cisaille, sécateur) dessinée en SVG directement dans `index.html` | **Votre photo**, portrait 1080 × 1350 : remplacez le `<svg>` et le bouton pause de la `<figure class="about__scene">` par une `<img>` |
 | Image de partage (réseaux sociaux) | `og-image.jpg` | 1200 × 630, JPEG |
 
 Conseils : photographiez avant et après chaque chantier depuis le même endroit, en lumière naturelle, sans personne reconnaissable sans son accord.
@@ -164,6 +163,7 @@ puis ouvrez `http://localhost:8080`.
 - Menu mobile accessible : focus piégé tant qu’il est ouvert, fermeture avec Échap.
 - Questions fréquentes en `<details>` natifs, utilisables au clavier.
 - Si le visiteur a demandé à limiter les animations (réglage « Réduire les animations » du système), le site s’affiche sans animation ni défilement doux.
+- La scène animée de la section « À propos » tourne en boucle uniquement quand elle est à l’écran, et un bouton permet de la mettre en pause. Sans animation, elle s’affiche figée sur le jardin entretenu.
 - Sans JavaScript, tout le contenu reste lisible.
 
 ---

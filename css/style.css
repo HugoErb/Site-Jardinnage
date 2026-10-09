@@ -83,7 +83,6 @@
   --radius-m: 14px;
   --radius-l: 26px;
   --radius-pill: 999px;
-  --radius-arch: 999px 999px var(--radius-m) var(--radius-m);
 
   --focus: var(--c-forest);
 }
@@ -804,7 +803,7 @@
   .service-card__media {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 1 / 1;
     border-radius: calc(var(--radius-l) - 0.45rem);
     background: var(--c-sage-2);
   }
@@ -906,35 +905,38 @@
     position: relative;
     width: 100%;
     max-width: 34rem;
-    padding-bottom: 2.5rem;
   }
-  .about__portrait {
+  .about__scene {
     position: relative;
     overflow: hidden;
     aspect-ratio: 4 / 5;
-    border-radius: var(--radius-arch);
-    background: var(--c-forest-3);
-  }
-  .about__portrait img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .about__detail {
-    position: absolute;
-    right: -0.5rem;
-    bottom: 0;
-    width: 36%;
-    overflow: hidden;
-    aspect-ratio: 1;
-    border: 6px solid var(--c-cream-2);
-    border-radius: 50%;
+    border-radius: var(--radius-l);
     background: var(--c-sage-2);
   }
-  .about__detail img {
+  .about__scene > svg {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+  }
+  /* Sans animation, le jardin reste net : les herbes folles n'apparaissent qu'avec main.js */
+  .about__scene .garden__wild { display: none; }
+  .motion-ready .about__scene .garden__wild { display: inline; }
+  .about__scene-toggle {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: rgb(246 245 239 / 0.86);
+    color: var(--c-forest);
+    box-shadow: 0 2px 10px rgb(16 45 36 / 0.16);
+    transition: background-color 0.3s var(--ease-out);
+  }
+  .about__scene-toggle .icon { width: 1.1rem; height: 1.1rem; }
+  @media (hover: hover) {
+    .about__scene-toggle:hover { background: var(--c-cream); }
   }
   .about__hello {
     margin-top: 1.75rem;
@@ -1131,7 +1133,7 @@
       linear-gradient(currentColor, currentColor) center / 1.5px 0.8rem no-repeat;
     transition: transform 0.45s var(--ease-out), background-color 0.45s var(--ease-out);
   }
-  .faq__item[open] summary::after {
+  .faq__item[open]:not(.is-closing) summary::after {
     background-size: 0.8rem 1.5px, 1.5px 0;
     background-color: var(--c-lime);
     transform: rotate(180deg);
@@ -1143,7 +1145,9 @@
     line-height: 1.25;
     letter-spacing: -0.01em;
   }
-  .faq__a { padding-bottom: 1.5rem; color: var(--c-moss); }
+  /* Marge basse portée par le contenu : la réponse peut s'animer jusqu'à 0 */
+  .faq__a { color: var(--c-moss); }
+  .faq__a > :last-child { padding-bottom: 1.5rem; }
   .faq__a p { max-width: 62ch; }
   @media (hover: hover) {
     .faq__item summary:hover::after { background-color: var(--c-lime); }

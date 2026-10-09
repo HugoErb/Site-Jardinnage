@@ -462,7 +462,7 @@
     });
 
     $$('[data-reveal="image"]').forEach(function (el) {
-      var img = $('img', el);
+      var img = $('img, svg', el);
       gsap.timeline({
         scrollTrigger: { trigger: el, start: 'top 90%', once: true },
         onComplete: function () {
@@ -618,6 +618,115 @@
         timer = setTimeout(function () { build(); ScrollTrigger.refresh(); }, 150);
       }).observe(wrap);
     }
+  }
+
+  /* ===================================================================
+     8 bis. À propos : le jardin entretenu en boucle
+     Tonte, taille de la haie, taille de l'arbuste, puis tout repousse.
+     L'état de fin est identique à l'état de départ : la boucle ne saute pas.
+     =================================================================== */
+  function initGarden(gsap, ScrollTrigger) {
+    var scene = $('[data-garden]');
+    if (!scene) return;
+    function part(name) { return $$('[data-g="' + name + '"]', scene); }
+    /* Abscisse d'un élément, lue sur le translate() de son groupe parent */
+    function baseX(el) { return el.parentNode.transform.baseVal.getItem(0).matrix.e; }
+    function fall(i) {
+      return { x: i % 2 ? 16 : -16, y: 130, rotation: i % 2 ? 70 : -70, opacity: 0, duration: 0.8, ease: 'power2.in' };
+    }
+
+    var clip = part('stripes-clip')[0];
+    var stripes = part('stripes')[0];
+    var wheels = part('wheel');
+    var blades = part('blade');
+    var sprigs = part('sprig');
+    var twigs = part('twig');
+    var cuttings = sprigs.concat(twigs);
+    var shoots = cuttings.map(function (el) { return el.firstElementChild; });
+    var secateur = part('secateur')[0];
+    var jaw = part('secateur-jaw')[0];
+    var toggle = $('[data-garden-toggle]', scene);
+
+    var MOW = 0.6, MOW_D = 4;     // tondeuse : x de -100 à 1000, l'avant du carter balaie -8 → 1092
+    var CUT = 4.3, CUT_D = 3.6;   // cisaille : la pointe des lames balaie -10 → 1190
+    var PRUNE = 7.7, STOP = 1.15; // sécateur : trois passes autour de l'arbuste
+    var GROW = 12.6;              // repousse
+    var tl = gsap.timeline({ repeat: -1, paused: true });
+
+    gsap.set(blades.concat(shoots), { transformOrigin: '50% 100%' });
+    gsap.set(cuttings.concat(wheels, part('shears-a'), part('shears-b'), jaw, secateur), { transformOrigin: '50% 50%' });
+
+    /* 1. Tonte : les bandes apparaissent derrière la tondeuse (bord droit du masque = avant du carter),
+          l'herbe haute disparaît à son passage jusqu'à la repousse */
+    tl.fromTo(part('mower'), { x: -100 }, { x: 1000, duration: MOW_D, ease: 'none' }, MOW)
+      .fromTo(clip, { attr: { x: -2008 } }, { attr: { x: -908 }, duration: MOW_D, ease: 'none' }, MOW)
+      .fromTo(wheels, { rotation: 0 }, { rotation: 2520, duration: MOW_D, ease: 'none' }, MOW)
+      .to(part('mower-body'), { y: -1.5, duration: 0.125, repeat: 31, yoyo: true, ease: 'sine.inOut' }, MOW)
+      .to(part('spray'), { opacity: 1, duration: 0.3, repeat: 1, repeatDelay: MOW_D - 0.6, yoyo: true }, MOW);
+    blades.forEach(function (el) {
+      tl.to(el, { scaleY: 0, duration: 0.16, ease: 'power2.in' }, MOW + (baseX(el) + 8) / 1100 * MOW_D);
+    });
+
+    /* 2. Haie : la cisaille longe le sommet, chaque pousse tombe au passage des lames */
+    tl.fromTo(part('shears'), { x: -190 }, { x: 1010, duration: CUT_D, ease: 'none' }, CUT)
+      .to(part('shears-a'), { rotation: -9, duration: 0.15, repeat: 23, yoyo: true, ease: 'sine.inOut' }, CUT)
+      .to(part('shears-b'), { rotation: 9, duration: 0.15, repeat: 23, yoyo: true, ease: 'sine.inOut' }, CUT);
+    sprigs.forEach(function (el, i) {
+      tl.to(el, fall(i), CUT + (baseX(el) + 10) / 1200 * CUT_D);
+    });
+
+    /* 3. Arbuste : le sécateur fait le tour de la boule, de droite à gauche */
+    var stops = [
+      { x: 355, y: 684, rotation: 160, scaleY: -1, twigs: [8, 7, 6] },
+      { x: 211.5, y: 575, rotation: 94, scaleY: 1, twigs: [5, 4, 3] },
+      { x: 49, y: 673, rotation: 24, scaleY: 1, twigs: [2, 1, 0] }
+    ];
+    tl.fromTo(secateur, { x: 900, y: 640, rotation: 160, scaleY: -1 },
+      { x: stops[0].x, y: stops[0].y, duration: 0.5, ease: 'power2.out' }, PRUNE);
+    stops.forEach(function (stop, k) {
+      var t = PRUNE + k * STOP;
+      if (k) tl.to(secateur, { x: stop.x, y: stop.y, rotation: stop.rotation, scaleY: stop.scaleY, duration: 0.5, ease: 'power2.inOut' }, t);
+      tl.to(jaw, { rotation: -22, duration: 0.14, repeat: 3, yoyo: true, ease: 'power1.inOut' }, t + 0.5);
+      stop.twigs.forEach(function (n, j) {
+        tl.to(twigs[n], fall(n), t + (j < 2 ? 0.78 + j * 0.05 : 1.06));
+      });
+    });
+    tl.to(secateur, { x: -160, y: 640, rotation: 24, duration: 0.6, ease: 'power2.in' }, PRUNE + 3 * STOP);
+
+    /* 4. Tout repousse, puis la boucle reprend à l'identique */
+    tl.to(stripes, { opacity: 0, duration: 1.4, ease: 'power1.inOut' }, GROW)
+      .to(blades, { scaleY: 1, duration: 1.2, ease: 'back.out(1.6)', stagger: { each: 0.04, from: 'random' } }, GROW + 0.2)
+      .set(cuttings, { x: 0, y: 0, rotation: 0, opacity: 1 }, GROW)
+      .set(shoots, { scale: 0 }, GROW)
+      .to(shoots, { scale: 1, duration: 0.9, ease: 'back.out(2)', stagger: { each: 0.05, from: 'random' } }, GROW + 0.1)
+      .set(clip, { attr: { x: -2008 } }, GROW + 1.5)
+      .set(stripes, { opacity: 1 }, GROW + 1.5);
+
+    /* Lecture seulement à l'écran ; le bouton pause l'emporte sur le défilement */
+    var inView = false;
+    var userPaused = false;
+    function sync() {
+      if (inView && !userPaused) tl.play();
+      else tl.pause();
+    }
+    var trigger = ScrollTrigger.create({
+      trigger: scene,
+      start: 'top bottom',
+      end: 'bottom top',
+      onToggle: function (self) { inView = self.isActive; sync(); }
+    });
+    inView = trigger.isActive;
+    sync();
+
+    if (!toggle) return;
+    var icon = $('use', toggle);
+    toggle.hidden = false;
+    toggle.addEventListener('click', function () {
+      userPaused = !userPaused;
+      toggle.setAttribute('aria-label', userPaused ? 'Relancer l’animation' : 'Mettre l’animation en pause');
+      icon.setAttribute('href', userPaused ? '#i-play' : '#i-pause');
+      sync();
+    });
   }
 
   /* ===================================================================
@@ -829,6 +938,49 @@
   }
 
   /* ===================================================================
+     11. Questions fréquentes : ouverture et fermeture animées
+     -------------------------------------------------------------------
+     <details> reste fonctionnel sans JS ; ici on anime seulement la
+     hauteur de la réponse. Un clic pendant l'animation la renverse.
+     =================================================================== */
+  function initFaq() {
+    $$('.faq__item').forEach(function (item) {
+      var summary = $('summary', item);
+      var answer = $('.faq__a', item);
+      if (!summary || !answer || !answer.animate) return;
+      var anim = null;
+
+      summary.addEventListener('click', function (event) {
+        if (media.reduce.matches) return;
+        event.preventDefault();
+        var closing = item.open && !item.classList.contains('is-closing');
+        /* Fermé, le contenu garde sa taille de mise en page (Chrome) : on part de 0 */
+        var from = item.open ? answer.getBoundingClientRect().height : 0;
+        if (anim) anim.cancel();
+
+        item.classList.toggle('is-closing', closing);
+        if (!closing) item.open = true;
+        var to = closing ? 0 : answer.scrollHeight;
+
+        answer.style.overflow = 'hidden';
+        anim = answer.animate([
+          { height: from + 'px', opacity: closing ? 1 : 0 },
+          { height: to + 'px', opacity: closing ? 0 : 1 }
+        ], {
+          duration: closing ? 400 : 560,
+          easing: 'cubic-bezier(0.25, 1, 0.5, 1)'
+        });
+        anim.onfinish = function () {
+          if (closing) item.open = false;
+          item.classList.remove('is-closing');
+          answer.style.overflow = '';
+          anim = null;
+        };
+      });
+    });
+  }
+
+  /* ===================================================================
      99. Démarrage
      =================================================================== */
   function boot() {
@@ -853,6 +1005,7 @@
     initAnchors(lenis, menu);
     initContactForm(cfg);
     initMobileDock();
+    initFaq();
 
     if (!motion) {
       initProcessStem(null, null);
@@ -870,6 +1023,7 @@
       initReveals(gsap, ScrollTrigger, SplitText);
       initServicesDepth(gsap);
       initProcessStem(gsap, ScrollTrigger);
+      initGarden(gsap, ScrollTrigger);
       ScrollTrigger.refresh();
       handleInitialHash(lenis);
     });

@@ -62,6 +62,8 @@
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
     <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
     <symbol id="i-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 4.8a1 1 0 0 1 1.5-.86l11.1 7.2a1 1 0 0 1 0 1.72l-11.1 7.2A1 1 0 0 1 6 19.2z"/></symbol>
     <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
     <symbol id="i-phone" viewBox="0 0 24 24"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></symbol>
   </svg>
@@ -208,7 +210,7 @@
             <article class="service-card" aria-labelledby="svc-nettoyage" data-order="3">
               <div class="service-card__media" data-reveal="image">
                 <img src="assets/images/illus-service-nettoyage.svg" width="800" height="1000" loading="lazy" decoding="async"
-                     alt="Illustration : feuilles mortes ratissées en tas sur une pelouse">
+                     alt="Illustration : râteau rassemblant en tas les feuilles mortes et branches tombées sous un arbre d’automne, laissant à droite une pelouse nette">
                 <span class="tag service-card__tag">Ponctuel</span>
               </div>
               <div class="service-card__body" data-reveal="up">
@@ -221,7 +223,7 @@
             <article class="service-card service-card--forest" aria-labelledby="svc-entretien" data-order="5">
               <div class="service-card__media" data-reveal="image">
                 <img src="assets/images/illus-service-entretien.svg" width="800" height="1000" loading="lazy" decoding="async"
-                     alt="Illustration : un arbre au fil des quatre saisons">
+                     alt="Illustration : le même jardin entretenu au printemps, en été, en automne et en hiver, avec une frise de passages réguliers">
                 <span class="tag tag--lime service-card__tag">Régulier</span>
               </div>
               <div class="service-card__body" data-reveal="up">
@@ -236,7 +238,7 @@
             <article class="service-card" aria-labelledby="svc-haies" data-order="2">
               <div class="service-card__media" data-reveal="image">
                 <img src="assets/images/illus-service-haies.svg" width="800" height="1000" loading="lazy" decoding="async"
-                     alt="Illustration : arbuste taillé en cône, à moitié taillé">
+                     alt="Illustration : taille-haie égalisant une haie hirsute, avec à droite une haie taillée au cordeau et une boule d’arbuste nette">
                 <span class="tag service-card__tag">Selon la saison</span>
               </div>
               <div class="service-card__body" data-reveal="up">
@@ -249,7 +251,7 @@
             <article class="service-card" aria-labelledby="svc-desherbage" data-order="4">
               <div class="service-card__media" data-reveal="image">
                 <img src="assets/images/illus-service-desherbage.svg" width="800" height="1000" loading="lazy" decoding="async"
-                     alt="Illustration : débroussailleuse attaquant une friche, fourche et mauvaises herbes arrachées devant un massif net">
+                     alt="Illustration : débroussailleuse coupant une friche haute, avec à droite une pelouse rase et nette">
                 <span class="tag service-card__tag">Ponctuel</span>
               </div>
               <div class="service-card__body" data-reveal="up">
@@ -282,14 +284,148 @@
     <section class="section section--cream2 about" id="a-propos" aria-labelledby="about-title" data-header-theme="light">
       <div class="container about__grid">
         <div class="about__visual">
-          <!-- Remplacez ces illustrations par vos photos (voir README, « Remplacer les visuels »). -->
-          <figure class="about__portrait" data-reveal="image">
-            <img src="assets/images/illus-arche.svg" width="1080" height="1350" loading="lazy" decoding="async"
-                 alt="Illustration : un jardin entretenu vu à travers une arche taillée dans une haie">
-          </figure>
-          <figure class="about__detail" data-reveal="image">
-            <img src="assets/images/illus-topiaire.svg" width="560" height="560" loading="lazy" decoding="async"
-                 alt="Illustration : petit arbuste taillé en boule dans un pot">
+          <!-- Scène animée par main.js (initGarden). Sans animation, le jardin s'affiche net, déjà entretenu. -->
+          <figure class="about__scene" data-reveal="image" data-garden>
+            <svg viewBox="0 0 800 1000" role="img" aria-labelledby="garden-title">
+              <title id="garden-title">Illustration animée : une tondeuse, une cisaille et un sécateur entretiennent la pelouse, la haie et un arbuste</title>
+              <defs>
+                <linearGradient id="gx-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#86C1E8"/><stop offset="1" stop-color="#D9EEF7"/></linearGradient>
+                <radialGradient id="gx-glow"><stop offset=".55" stop-color="#FFF6CC"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
+                <linearGradient id="gx-steel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2F4F3"/><stop offset=".5" stop-color="#C8CFCC"/><stop offset="1" stop-color="#8A9692"/></linearGradient>
+                <pattern id="gx-leaves" width="56" height="44" patternUnits="userSpaceOnUse"><path d="M6 12q8-7 15 0q-8 7-15 0zM33 31q8-7 15 0q-8 7-15 0zM30 7q5-6 11-3q-5 6-11 3zM10 36q4-5 9-2q-4 5-9 2z" fill="#F6F5EF" fill-opacity=".09"/></pattern>
+                <clipPath id="gx-mown"><rect data-g="stripes-clip" x="-1200" y="640" width="2000" height="360"/></clipPath>
+                <g id="gx-sprig"><path d="M-1.5 0Q-3-20 1-42l2.5 1Q0-20 1.5 0zM0-16q-16-6-20-18q14 4 20 18zM1-26q15-4 19-16q-14 2-19 16zM1-40q-7-10 0-18q7 8 0 18z"/></g>
+                <!-- Moitié de cisaille : lame du dessus et poignée du dessous (l'autre moitié est son reflet) -->
+                <g id="gx-shear-half">
+                  <path d="M-46 5L-8 3v9l-38 1z" fill="#4A5A52"/>
+                  <path d="M-44 5L-176 9v10l132-5z" fill="#1F4A3D"/>
+                  <path d="M-98 4.5L-182 7q-16 6 0 14l84-4z" fill="#D8EC84"/>
+                  <path d="M-114 5.5v12M-130 6v13M-146 6.5v13.5M-162 7v14" stroke="#102D24" stroke-opacity=".2" stroke-width="2.5"/>
+                  <circle cx="-42" cy="9" r="6.5" fill="#1C2420"/>
+                  <path d="M-12 0v-11q8-5 24-4l148 8q24 2 20 7H36q-9-9-18 0z" fill="url(#gx-steel)" stroke="#4A5A52" stroke-width="1.2" stroke-linejoin="round"/>
+                  <path d="M38-2h134" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1.6" stroke-linecap="round"/>
+                </g>
+                <g id="gx-tuft"><path d="M-12 0q-2-24-10-40q14 14 16 40zM-5 0q1-30 3-48q6 20 4 48zM3 0q5-22 15-38q-8 20-8 38z"/></g>
+              </defs>
+
+              <!-- Ciel, soleil et arbres au loin -->
+              <rect width="800" height="660" fill="url(#gx-sky)"/>
+              <circle cx="600" cy="170" r="104" fill="url(#gx-glow)"/>
+              <circle cx="600" cy="170" r="58" fill="#FAD14A"/>
+              <path d="M150 168q10-9 20 0q10-9 20 0M232 124q7-6 14 0q7-6 14 0" fill="none" stroke="#4A5A52" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <g fill="#9DBA90"><circle cx="60" cy="372" r="62"/><circle cx="150" cy="336" r="58"/><circle cx="236" cy="380" r="46"/><circle cx="520" cy="346" r="70"/><circle cx="624" cy="380" r="52"/><circle cx="720" cy="336" r="66"/><circle cx="804" cy="378" r="50"/></g>
+
+              <!-- Pelouse et bandes de tonte -->
+              <rect y="640" width="800" height="360" fill="#8FAA7C"/>
+              <g data-g="stripes" clip-path="url(#gx-mown)" fill="#A3BD8F"><rect y="690" width="800" height="46"/><rect y="792" width="800" height="66"/><rect y="934" width="800" height="66"/></g>
+
+              <!-- Haie -->
+              <rect x="-20" y="404" width="840" height="252" fill="#1F4A3D"/>
+              <rect x="-20" y="404" width="840" height="252" fill="url(#gx-leaves)"/>
+              <rect x="-20" y="392" width="840" height="20" rx="6" fill="#376A52"/>
+              <rect x="-20" y="656" width="840" height="14" fill="#102D24" opacity=".12"/>
+              <g class="garden__wild" fill="#2C5A47">
+                <g transform="translate(30 400) scale(.9)"><g data-g="sprig"><use href="#gx-sprig" transform="rotate(-18)"/></g></g>
+                <g transform="translate(85 400) scale(1.1)"><g data-g="sprig"><use href="#gx-sprig" transform="rotate(10)"/></g></g>
+                <g transform="translate(140 400) scale(.85)"><g data-g="sprig"><use href="#gx-sprig" transform="rotate(-6)"/></g></g>
+                <g transform="translate(205 400)"><g data-g="sprig"><use href="#gx-sprig" transform="rotate(22)"/></g></g>
+                <g transform="translate(260 400) scale(1.15)"><g data-g="sprig"><use href="#gx-sprig" transform="rotate(-14)"/></g></g>
+                <g transform="translate(320 400) scale(.9)"><g data-g="sprig"><use href="#gx-sprig" transform="rotate(6)"/></g></g>
+                <g transform="translate(375 400) scale(1.05)"><g data-g="sprig"><use href="#gx-sprig" transform="rotate(18)"/></g></g>
+                <g transform="translate(440 400) scale(.95)"><g data-g="sprig"><use href="#gx-sprig" transform="rotate(-10)"/></g></g>
+                <g transform="translate(495 400) scale(1.15)"><g data-g="sprig"><use href="#gx-sprig" transform="rotate(12)"/></g></g>
+                <g transform="translate(555 400) scale(.9)"><g data-g="sprig"><use href="#gx-sprig" transform="rotate(-20)"/></g></g>
+                <g transform="translate(610 400) scale(1.05)"><g data-g="sprig"><use href="#gx-sprig" transform="rotate(4)"/></g></g>
+                <g transform="translate(670 400) scale(.85)"><g data-g="sprig"><use href="#gx-sprig" transform="rotate(16)"/></g></g>
+                <g transform="translate(725 400) scale(1.1)"><g data-g="sprig"><use href="#gx-sprig" transform="rotate(-8)"/></g></g>
+                <g transform="translate(780 400) scale(.95)"><g data-g="sprig"><use href="#gx-sprig" transform="rotate(14)"/></g></g>
+              </g>
+
+              <!-- Herbe haute, derrière l'arbuste -->
+              <g class="garden__wild" fill="#5E8462">
+                <g transform="translate(330 680) scale(.83)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(420 672) scale(.81)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(520 690) scale(.85)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(610 676) scale(.82)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(700 694) scale(.87)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(780 684) scale(.84)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(360 740) scale(.99)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(470 756) scale(1.03)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(580 734) scale(.97)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(690 762) scale(1.05)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(40 760) scale(1.05)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(320 800) scale(1.15)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(760 790) scale(1.13)"><use data-g="blade" href="#gx-tuft"/></g>
+              </g>
+
+              <!-- Arbuste taillé en boule -->
+              <ellipse cx="210" cy="874" rx="96" ry="14" fill="#102D24" opacity=".18"/>
+              <rect x="192" y="830" width="16" height="44" rx="3" fill="#6B6A55"/>
+              <circle cx="200" cy="740" r="100" fill="#2C5A47"/>
+              <circle cx="200" cy="740" r="100" fill="url(#gx-leaves)"/>
+              <circle cx="172" cy="708" r="54" fill="#376A52" opacity=".55"/>
+              <g class="garden__wild" fill="#47785C">
+                <g transform="translate(108.1 736.8) scale(.85)"><g data-g="twig"><use href="#gx-sprig" transform="rotate(-88)"/></g></g>
+                <g transform="translate(116 702.6) scale(.85)"><g data-g="twig"><use href="#gx-sprig" transform="rotate(-66)"/></g></g>
+                <g transform="translate(133.8 676.1) scale(.85)"><g data-g="twig"><use href="#gx-sprig" transform="rotate(-46)"/></g></g>
+                <g transform="translate(171.6 652.5) scale(.85)"><g data-g="twig"><use href="#gx-sprig" transform="rotate(-18)"/></g></g>
+                <g transform="translate(206.4 648.2) scale(.85)"><g data-g="twig"><use href="#gx-sprig" transform="rotate(4)"/></g></g>
+                <g transform="translate(237.4 656) scale(.85)"><g data-g="twig"><use href="#gx-sprig" transform="rotate(24)"/></g></g>
+                <g transform="translate(270.5 680.9) scale(.85)"><g data-g="twig"><use href="#gx-sprig" transform="rotate(50)"/></g></g>
+                <g transform="translate(286.5 708.5) scale(.85)"><g data-g="twig"><use href="#gx-sprig" transform="rotate(70)"/></g></g>
+                <g transform="translate(291.9 743.2) scale(.85)"><g data-g="twig"><use href="#gx-sprig" transform="rotate(92)"/></g></g>
+              </g>
+
+              <!-- Herbe haute, premier plan -->
+              <g class="garden__wild" fill="#5E8462">
+                <g transform="translate(60 880) scale(1.37)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(180 900) scale(1.43)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(300 860) scale(1.32)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(420 900) scale(1.43)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(530 870) scale(1.35)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(640 910) scale(1.45)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(740 880) scale(1.37)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(110 970) scale(1.62)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(260 975) scale(1.63)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(400 980) scale(1.65)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(560 972) scale(1.62)"><use data-g="blade" href="#gx-tuft"/></g>
+                <g transform="translate(700 985) scale(1.66)"><use data-g="blade" href="#gx-tuft"/></g>
+              </g>
+
+              <!-- Tondeuse (garée tant que l'animation ne tourne pas) -->
+              <g data-g="mower" transform="translate(560 952)"><g transform="scale(.85)">
+                <g data-g="spray" opacity="0" fill="none" stroke="#6F8F6A" stroke-width="4" stroke-linecap="round"><path d="M-116-30l-16-6M-122-46l-16-4M-114-58l-12-10M-126-18l-16 2"/></g>
+                <g data-g="mower-body">
+                  <path d="M-84-72L-176-236" stroke="#102D24" stroke-width="9" stroke-linecap="round"/>
+                  <path d="M-194-236h34" stroke="#1C2420" stroke-width="14" stroke-linecap="round"/>
+                  <rect x="-34" y="-118" width="76" height="32" rx="12" fill="#1F4A3D"/>
+                  <rect x="-6" y="-128" width="20" height="12" rx="4" fill="#102D24"/>
+                  <path d="M-104-34C-104-70-76-88-40-90h96c36 2 52 24 52 54v6c0 6-4 10-10 10H-96c-5 0-8-4-8-10z" fill="#D8EC84"/>
+                  <path d="M-104-38h212v8c0 6-4 10-10 10H-96c-5 0-8-4-8-10z" fill="#102D24" opacity=".14"/>
+                  <path d="M-70-76c20-8 110-8 140 0" fill="none" stroke="#F6F5EF" stroke-width="4" stroke-linecap="round" opacity=".6"/>
+                </g>
+                <g data-g="wheel"><circle cx="-66" cy="-28" r="28" fill="#1C2420"/><circle cx="-66" cy="-28" r="11" fill="#ECEBE2"/><rect x="-68.5" y="-37" width="5" height="18" rx="2" fill="#1C2420"/></g>
+                <g data-g="wheel"><circle cx="70" cy="-24" r="24" fill="#1C2420"/><circle cx="70" cy="-24" r="9" fill="#ECEBE2"/><rect x="67.5" y="-32" width="5" height="16" rx="2" fill="#1C2420"/></g></g>
+              </g>
+
+              <!-- Cisaille à haie et sécateur (hors cadre au repos) ; chaque lame tourne avec la poignée opposée -->
+              <g data-g="shears" transform="translate(-220 394)">
+                <g data-g="shears-b"><rect x="-200" y="-24" width="400" height="48" fill="none"/><use href="#gx-shear-half" transform="scale(1 -1)"/></g>
+                <g data-g="shears-a"><rect x="-200" y="-24" width="400" height="48" fill="none"/><use href="#gx-shear-half"/></g>
+                <circle r="8" fill="#4A5A52"/><circle r="3.5" fill="#E4E8E6"/>
+              </g>
+              <g data-g="secateur" transform="translate(900 640)">
+                <g transform="scale(1.3)" stroke="#4A5A52" stroke-width="1.2" stroke-linejoin="round">
+                  <path d="M-2 3C14 12 30 10 40 0C34 12 18 16 0 12z" fill="#A9BEA2"/>
+                  <path d="M2-4C-20-14-48-18-72-12c-5 1-5 7 0 7C-48-8-22-2-2 5z" fill="#D8EC84"/>
+                  <g data-g="secateur-jaw"><rect x="-80" y="-24" width="160" height="48" fill="none" stroke="none"/><path d="M-2-3C14-16 34-18 46-8C34-6 18-2 2 4z" fill="#ECEBE2"/><path d="M-2-2C-22 4-48 10-72 10c-5 0-5 7 0 7C-48 18-22 12 2 5z" fill="#D8EC84"/></g>
+                  <circle r="4" fill="#102D24" stroke="none"/>
+                </g>
+              </g>
+            </svg>
+            <button class="about__scene-toggle" type="button" data-garden-toggle aria-label="Mettre l’animation en pause" hidden>
+              <svg class="icon" aria-hidden="true"><use href="#i-pause"/></svg>
+            </button>
           </figure>
         </div>
 
