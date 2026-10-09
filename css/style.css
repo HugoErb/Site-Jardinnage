@@ -355,6 +355,13 @@
   .js.motion [data-reveal] { opacity: 0; }
   .js.motion:not(.motion-ready) [data-reveal] { animation: reveal-fallback 0.01s 3s forwards; }
   @keyframes reveal-fallback { to { opacity: 1; transform: none; clip-path: none; visibility: visible; } }
+
+  /* Masques de lignes SplitText : marge haute et basse pour ne pas rogner
+     accents et jambages (« j », « y ») avec les interlignages serrés */
+  .split-line-mask {
+    padding-block: 0.2em;
+    margin-block: -0.2em;
+  }
 }
 
 /* =====================================================================
@@ -443,7 +450,11 @@
     transition: color 0.5s var(--ease-out);
   }
   .site-header.is-scrolled:not(.is-dark):not(.menu-open) .brand__mark { color: var(--c-forest); --mark-vein: var(--c-cream); }
+  /* overflow coupe les jambages (« y ») avec line-height: 1 : on agrandit la
+     boîte verticalement sans changer la mise en page */
   .brand__name {
+    padding-block: 0.2em;
+    margin-block: -0.2em;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -1327,6 +1338,14 @@
     .contact__grid {
       grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
       align-items: start;
+    }
+  }
+  /* Le formulaire suit le défilement le long du texte, seulement si l'écran
+     est assez haut pour l'afficher en entier (sinon le bouton serait caché) */
+  @media (min-width: 1024px) and (min-height: 880px) {
+    .contact__form-wrap {
+      position: sticky;
+      top: calc(var(--header-h) + 1.5rem);
     }
   }
 }

@@ -383,7 +383,7 @@
     }
 
     fontsReady().then(function () {
-      var split = SplitText.create(title, { type: 'lines', mask: 'lines' });
+      var split = SplitText.create(title, { type: 'lines', mask: 'lines', linesClass: 'split-line' });
       gsap.timeline({
         defaults: { ease: 'expo.out' },
         onComplete: function () {
@@ -398,7 +398,7 @@
         .fromTo(scene, { scale: 1.16 }, { scale: 1, duration: 1.9 }, 0.35)
         .from(planes.slice(2), { y: function (i) { return 50 + i * 40; }, duration: 1.8, stagger: 0.06 }, 0.4)
         .to(cut, { opacity: 0, duration: 0.35, ease: 'none' }, 0.8)
-        .from(split.lines, { yPercent: 108, duration: 1.15, stagger: 0.09 }, 0.6)
+        .from(split.lines, { yPercent: 130, duration: 1.15, stagger: 0.09 }, 0.6)
         .fromTo(items, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.95, stagger: 0.08 }, 0.95);
     });
   }
@@ -451,10 +451,11 @@
       SplitText.create(el, {
         type: 'lines',
         mask: 'lines',
+        linesClass: 'split-line',
         autoSplit: true,
         onSplit: function (self) {
           return gsap.from(self.lines, {
-            yPercent: 105, duration: 1.1, stagger: 0.08, ease: 'expo.out',
+            yPercent: 130, duration: 1.1, stagger: 0.08, ease: 'expo.out',
             scrollTrigger: { trigger: el, start: 'top 88%', once: true }
           });
         }
