@@ -11,8 +11,7 @@ window.SITE_CONFIG = {
   /* Activité ------------------------------------------------------- */
   business: {
     name: "Axel Royer",                 // Ex. « Jardins Martin » (logo, pied de page, e-mails)
-    tagline: "Jardinier paysagiste indépendant",
-    description: "Entretien de jardins et d’espaces verts chez les particuliers."
+    description: "Jardinier paysagiste indépendant à Pau : tonte, taille de haies et d’arbustes, désherbage, débroussaillage, nettoyage et entretien régulier de jardins chez les particuliers."
   },
 
   /* Le professionnel ----------------------------------------------- */
@@ -29,12 +28,11 @@ window.SITE_CONFIG = {
   },
 
   /* Zone d’intervention ---------------------------------------------
-     radiusKm : nombre (ex. 20) ou null pour masquer la mention du rayon.
-     communes : liste des communes desservies ; [] pour masquer la liste. */
+     communes : communes desservies, affichées dans la section Contact
+     et reprises dans les données structurées ; [] pour masquer. */
   zone: {
     city: "Pau",                               // Commune principale
-    radiusKm: null,
-    communes: ["Commune 1", "Commune 2", "Commune 3", "Commune 4", "Commune 5", "Commune 6"]
+    communes: ["Billère", "Lons", "Lescar", "Jurançon", "Gelos", "Bizanos", "Idron", "Lée", "Mazères-Lezons", "Gan"]
   },
 
   /* Horaires : une ligne par entrée ; [] pour masquer le bloc. */
@@ -51,14 +49,6 @@ window.SITE_CONFIG = {
     google: ""                                  // Fiche Google Business Profile
   },
 
-  /* Mode démonstration ----------------------------------------------
-     true : affiche « Photo d’illustration » sur les photos de banque
-     d’images et une note dans la section Réalisations.
-     Passez à false une fois vos propres photos en place. */
-  demo: {
-    illustrationLabels: true
-  },
-
   /* Référencement ----------------------------------------------------
      structuredData : passez à true une fois les informations réelles
      renseignées (ajoute les données structurées LocalBusiness).
@@ -69,21 +59,28 @@ window.SITE_CONFIG = {
   },
 
   /* Mentions légales (pages mentions-legales.html et confidentialite.html)
-     Remplacez chaque valeur entre crochets par l’information réelle. */
+     Remplacez chaque valeur entre crochets par l’information réelle :
+     elles restent surlignées en vert sur le site tant qu’elles ne le
+     sont pas. Une valeur "" masque la ligne correspondante. */
   legal: {
     ownerName: "Axel Royer",
     status: "Entrepreneur individuel (EI)",
-    address: "[Adresse postale]",
-    siret: "[Numéro SIRET]",
-    vat: "",                                    // N° de TVA intracommunautaire, ou "" si non applicable
+    address: "[À REMPLIR : adresse postale]",
+    siret: "[À REMPLIR : numéro SIRET]",
+    registration: "[À REMPLIR : immatriculation, ex. « Registre national des entreprises (RNE) »]",
+    vat: "[À REMPLIR : n° de TVA intracommunautaire, ou « TVA non applicable, art. 293 B du CGI » en micro-entreprise]",
+    insurance: "[À REMPLIR : assureur responsabilité civile professionnelle et zone couverte, ou \"\" si aucune]",
+    sap: "[À REMPLIR : n° de déclaration Services à la personne, ou \"\" si non déclaré]",
     mediator: {
-      name: "[Nom et coordonnées du médiateur de la consommation]",
+      name: "[À REMPLIR : nom et coordonnées du médiateur de la consommation]",
       url: ""
     },
     host: {
       name: "GitHub, Inc.",
       address: "88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis",
+      phone: "+1 877 448 4820",
       url: "https://github.com"
-    }
+    },
+    updated: "9 octobre 2026"                   // Date de dernière mise à jour des pages légales
   }
 };

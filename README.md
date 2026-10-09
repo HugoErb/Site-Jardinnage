@@ -15,7 +15,7 @@ Le site est **100 % statique** : HTML, CSS et JavaScript, sans backend, sans bas
 5. [Le formulaire de devis](#5-le-formulaire-de-devis)
 6. [Publier sur GitHub Pages](#6-publier-sur-github-pages)
 7. [Tester en local](#7-tester-en-local)
-8. [Performances (facultatif)](#8-performances-facultatif)
+8. [Référencement (SEO)](#8-référencement-seo)
 9. [Accessibilité et animations](#9-accessibilité-et-animations)
 10. [Licences et crédits](#10-licences-et-crédits)
 
@@ -26,15 +26,17 @@ Le site est **100 % statique** : HTML, CSS et JavaScript, sans backend, sans bas
 ```text
 /
 ├── index.html                 Page d’accueil (toutes les sections)
-├── mentions-legales.html      Mentions légales (à compléter)
-├── confidentialite.html       Politique de confidentialité (à compléter)
+├── mentions-legales.html      Mentions légales (champs [À REMPLIR] dans config.js)
+├── confidentialite.html       Politique de confidentialité
+├── 404.html                   Page « introuvable » (servie automatiquement par GitHub Pages)
 ├── robots.txt
+├── sitemap.xml                Plan du site pour les moteurs de recherche
 ├── css/
 │   └── style.css              Design (couleurs, typographie, composants, animations)
 ├── js/
 │   ├── config.js              ← TOUTES les informations du professionnel
-│   ├── main.js                Comportements (menu, animations, comparateur, formulaire…)
-│   └── vendor/                GSAP, Lenis et Tailwind hébergés avec le site (+ LICENSES.md)
+│   ├── main.js                Comportements (menu, animations, formulaire, données structurées…)
+│   └── vendor/                GSAP et Lenis hébergés avec le site (+ LICENSES.md)
 ├── assets/
 │   ├── fonts/                 Polices Fraunces et Instrument Sans (+ OFL.txt)
 │   └── images/                Illustrations SVG, image de partage, favicon
@@ -52,21 +54,21 @@ Ouvrez **`js/config.js`** et remplacez les valeurs entre guillemets. Le site se 
 | Champ | Rôle | Exemple |
 |---|---|---|
 | `business.name` | Nom de l’activité (logo, pied de page, e-mails) | `"Jardins Martin"` |
-| `business.tagline`, `business.description` | Accroche et description courte | |
+| `business.description` | Description courte (données structurées) | |
 | `person.firstName` | Prénom (« Bonjour, je suis… », « Appeler… ») | `"Julien"` |
 | `contact.phone` | Téléphone, format libre | `"06 12 34 56 78"` |
 | `contact.email` | Adresse qui reçoit les demandes de devis | `"contact@jardins-martin.fr"` |
 | `zone.city` | Commune principale | `"Pau"` |
-| `zone.radiusKm` | Rayon d’intervention en km, ou `null` pour masquer la phrase | `20` |
-| `zone.communes` | Communes desservies (liste et schéma) ; `[]` pour masquer | `["Billère", "Lons"]` |
+| `zone.communes` | Communes desservies (section Contact et données structurées) ; `[]` pour masquer | `["Billère", "Lons"]` |
 | `hours` | Horaires, une ligne par entrée ; `[]` pour masquer | `[{ days: "Lundi – vendredi", time: "8 h – 18 h" }]` |
 | `social.*` | Liens Instagram, Facebook, LinkedIn, fiche Google ; `""` pour masquer | `"https://www.instagram.com/…"` |
-| `demo.illustrationLabels` | Affiche les mentions « Illustration » ; passez à `false` avec vos photos | `true` |
 | `seo.structuredData` | Ajoute les données structurées Google (LocalBusiness) | `false` puis `true` |
 | `seo.siteUrl` | Adresse publique du site | `"https://hugoerb.github.io/Site-Jardinnage/"` |
-| `legal.*` | Informations des mentions légales (exploitant, adresse, SIRET, TVA, médiateur, hébergeur) | |
+| `legal.*` | Mentions légales : exploitant, adresse, SIRET, immatriculation, TVA, assurance, déclaration Services à la personne, médiateur, hébergeur, date de mise à jour | |
 
-Les valeurs entre crochets (par exemple `[Numéro SIRET]`) sont **surlignées en vert** sur le site tant qu’elles ne sont pas remplacées.
+Les valeurs entre crochets (par exemple `[À REMPLIR : numéro SIRET]`) sont **surlignées en vert** sur le site tant qu’elles ne sont pas remplacées. Pour `legal.registration`, `legal.vat`, `legal.insurance` et `legal.sap`, la valeur `""` masque la ligne.
+
+> Les communes de `zone.communes` sont aussi écrites en dur dans `index.html` (FAQ, pied de page, liste affichée sans JavaScript) et dans la `meta description` : modifiez-les aussi à ces endroits.
 
 > Le numéro de téléphone fourni (`06 39 98 00 00`) appartient à une plage réservée aux œuvres de fiction : il ne correspond à personne. Remplacez-le avant la mise en ligne.
 
@@ -75,12 +77,13 @@ Les valeurs entre crochets (par exemple `[Numéro SIRET]`) sont **surlignées en
 ## 3. Check-list avant la mise en ligne
 
 - [ ] `js/config.js` : nom, prénom, téléphone, e-mail, communes desservies, horaires, réseaux sociaux.
-- [ ] `js/config.js` → `legal` : exploitant, adresse, SIRET, TVA éventuelle, **médiateur de la consommation** (obligatoire pour une activité auprès des particuliers).
-- [ ] `confidentialite.html` : remplacer `[durée à préciser]` (durée de conservation des demandes).
-- [ ] `index.html`, `mentions-legales.html`, `confidentialite.html` : vérifier le `<title>` et la `meta description` (balises en haut de fichier, repérées par un commentaire « À PERSONNALISER »).
-- [ ] Remplacer les illustrations par de vraies photos (section 4), puis `demo.illustrationLabels: false`.
+- [ ] `js/config.js` → `legal` : remplacer chaque `[À REMPLIR …]` (adresse, SIRET, immatriculation, TVA, assurance, Services à la personne) et renseigner le **médiateur de la consommation** (obligatoire pour une activité auprès des particuliers).
+- [ ] `index.html`, FAQ « crédit d’impôt » : remplacer la mention `[À REMPLIR …]` selon que l’activité est déclarée Services à la personne ou non.
+- [ ] `confidentialite.html` : vérifier que les durées de conservation correspondent à votre pratique.
+- [ ] `index.html`, `mentions-legales.html`, `confidentialite.html` : vérifier le `<title>`, la `meta description` et les balises `og:*` / `twitter:*` (nom de l’activité, communes).
+- [ ] Remplacer les illustrations par de vraies photos (section 4).
 - [ ] Une fois les informations réelles en place : `seo.structuredData: true`.
-- [ ] Domaine personnalisé : adapter `seo.siteUrl` et les balises `canonical`, `og:url` et `og:image` de `index.html`.
+- [ ] Domaine personnalisé : adapter `seo.siteUrl`, les balises `canonical`, `og:url`, `og:image` et `twitter:image` de `index.html`, ainsi que `robots.txt` et `sitemap.xml`.
 
 ---
 
@@ -127,7 +130,7 @@ Le site n’a pas de serveur : le formulaire **n’envoie rien lui-même**. Quan
 
 Tous les chemins sont relatifs : le site fonctionne dans un sous-dossier comme sur un domaine personnalisé. Pour un **domaine personnalisé**, renseignez-le dans Settings → Pages (GitHub crée le fichier `CNAME`), puis mettez à jour `seo.siteUrl` et les balises `canonical` / `og:*` de `index.html`.
 
-> Sur une adresse de type `utilisateur.github.io/depot/`, les moteurs de recherche ne lisent pas le `robots.txt` du dépôt (il doit se trouver à la racine du domaine). Il devient utile avec un domaine personnalisé. Vous pourrez alors ajouter un `sitemap.xml` et le déclarer dans la Google Search Console.
+> Sur une adresse de type `utilisateur.github.io/depot/`, les moteurs de recherche ne lisent pas le `robots.txt` du dépôt (il doit se trouver à la racine du domaine) : déclarez directement `sitemap.xml` dans la Google Search Console. Avec un domaine personnalisé, `robots.txt` et `sitemap.xml` sont lus automatiquement.
 
 ---
 
@@ -144,15 +147,14 @@ puis ouvrez `http://localhost:8080`.
 
 ---
 
-## 8. Performances (facultatif)
+## 8. Référencement (SEO)
 
-Tailwind est chargé sous forme de script (`js/vendor/tailwindcss-browser.min.js`), qui génère les styles dans le navigateur : aucune compilation n’est nécessaire. Pour gagner encore en rapidité, vous pouvez générer une feuille Tailwind définitive :
-
-1. Créez un fichier `tailwind-input.css` contenant `@import "tailwindcss";` suivi du bloc `@theme inline { … }` présent dans le `<head>` de `index.html`.
-2. Lancez : `npx @tailwindcss/cli@4.3.3 -i tailwind-input.css -o css/tailwind.css --minify`
-3. Dans les trois pages HTML, remplacez la ligne `<script defer src="js/vendor/tailwindcss-browser.min.js"></script>` et le bloc `<style type="text/tailwindcss">` par `<link rel="stylesheet" href="css/tailwind.css">`.
-
-Pensez à relancer la commande si vous ajoutez de nouvelles classes Tailwind dans le HTML.
+- Titre, description, balises Open Graph / Twitter et URL canonique dans le `<head>` de `index.html`. Les pages légales et la page 404 sont en `noindex`.
+- Un seul `<h1>` par page, avec le métier et la ville ; les communes desservies apparaissent en clair (Contact, FAQ, pied de page).
+- Section « Questions fréquentes » : contenu pensé pour les recherches courantes (devis, période de taille, déchets verts, crédit d’impôt).
+- Données structurées `LocalBusiness` + `WebSite` (schema.org), générées par `js/main.js` à partir de `config.js` quand `seo.structuredData` vaut `true`. Les valeurs encore `[À REMPLIR]` sont ignorées. Vérifiez le résultat avec le [test des résultats enrichis](https://search.google.com/test/rich-results).
+- Aucune ressource externe, polices préchargées, images dimensionnées et chargées à la demande : le site reste léger et rapide.
+- Après la mise en ligne : créez une **fiche Google Business Profile** (levier n° 1 du référencement local), puis renseignez son lien dans `social.google`.
 
 ---
 
@@ -160,8 +162,7 @@ Pensez à relancer la commande si vous ajoutez de nouvelles classes Tailwind dan
 
 - Navigation complète au clavier, focus visibles, lien « Aller au contenu ».
 - Menu mobile accessible : focus piégé tant qu’il est ouvert, fermeture avec Échap.
-- Comparateur avant/après utilisable au clavier (flèches) et au doigt, sans bloquer le défilement.
-- Galerie : visionneuse native (`<dialog>`), navigation aux flèches, fermeture avec Échap.
+- Questions fréquentes en `<details>` natifs, utilisables au clavier.
 - Si le visiteur a demandé à limiter les animations (réglage « Réduire les animations » du système), le site s’affiche sans animation ni défilement doux.
 - Sans JavaScript, tout le contenu reste lisible.
 
@@ -172,4 +173,4 @@ Pensez à relancer la commande si vous ajoutez de nouvelles classes Tailwind dan
 - **Illustrations** : créations originales réalisées pour ce site.
 - **Polices** : Fraunces et Instrument Sans, SIL Open Font License 1.1 (`assets/fonts/OFL.txt`).
 - **Icônes** : Lucide (ISC).
-- **Bibliothèques** : GSAP 3.15 (licence standard GSAP, gratuite), Lenis 1.3 (MIT), Tailwind CSS 4.3 (MIT). Détails dans `js/vendor/LICENSES.md`.
+- **Bibliothèques** : GSAP 3.15 (licence standard GSAP, gratuite), Lenis 1.3 (MIT). Détails dans `js/vendor/LICENSES.md`.

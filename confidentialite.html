@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Politique de confidentialité | Jardinier paysagiste indépendant à Pau</title>
-  <meta name="description" content="Politique de confidentialité : données traitées, finalités, durée de conservation, absence de cookies et exercice de vos droits.">
+  <title>Politique de confidentialité | Axel Royer, jardinier paysagiste à Pau</title>
+  <meta name="description" content="Politique de confidentialité : données traitées, finalités, destinataires, durées de conservation, absence de cookies et exercice de vos droits.">
   <meta name="robots" content="noindex, follow">
   <meta name="theme-color" content="#102d24">
   <meta name="color-scheme" content="light">
@@ -16,21 +16,6 @@
   <script>
     (function (d) { d.documentElement.className = d.documentElement.className.replace(/\bno-js\b/, 'js'); })(document);
   </script>
-  <style type="text/tailwindcss">
-    @theme inline {
-      --color-forest: var(--c-forest);
-      --color-forest-2: var(--c-forest-2);
-      --color-sage: var(--c-sage);
-      --color-cream: var(--c-cream);
-      --color-cream-2: var(--c-cream-2);
-      --color-lime: var(--c-lime);
-      --color-ink: var(--c-ink);
-      --color-moss: var(--c-moss);
-      --font-serif: var(--f-serif);
-      --font-sans: var(--f-sans);
-    }
-  </style>
-  <script defer src="js/vendor/tailwindcss-browser.min.js"></script>
   <script defer src="js/config.js"></script>
   <script defer src="js/main.js"></script>
 </head>
@@ -64,11 +49,12 @@
     <div class="container">
       <article class="legal__article">
         <h1 class="legal__title">Politique de confidentialité</h1>
-        <p class="legal__intro">Cette page explique quelles données personnelles peuvent être traitées lorsque vous consultez ce site ou que vous me contactez, et comment exercer vos droits. Les éléments entre crochets sont à compléter.</p>
+        <p class="legal__intro">Cette page explique quelles données personnelles peuvent être traitées lorsque vous consultez ce site ou que vous me contactez, pourquoi, pendant combien de temps, et comment exercer vos droits, conformément au Règlement général sur la protection des données (RGPD) et à la loi Informatique et Libertés.</p>
+        <p class="legal__updated">Dernière mise à jour&nbsp;: <span data-bind="legal.updated">9 octobre 2026</span></p>
 
         <section aria-labelledby="pc-responsable">
           <h2 id="pc-responsable">Responsable du traitement</h2>
-          <p><span data-bind="legal.ownerName">Axel Royer</span>, <span data-bind="legal.status">Entrepreneur individuel (EI)</span>, exploitant de l’activité <span data-bind="business.name">Axel Royer</span>. Contact&nbsp;: <a class="link link--always" data-href="mailto" href="mailto:contact@example.com" data-bind="contact.email">contact@example.com</a>.</p>
+          <p><span data-bind="legal.ownerName">Axel Royer</span>, <span data-bind="legal.status">Entrepreneur individuel (EI)</span>, exploitant de l’activité <span data-bind="business.name">Axel Royer</span>, <span data-bind="legal.address">[À REMPLIR : adresse postale]</span>. Contact&nbsp;: <a class="link link--always" data-href="mailto" href="mailto:contact@example.com" data-bind="contact.email">contact@example.com</a>.</p>
         </section>
 
         <section aria-labelledby="pc-site">
@@ -79,27 +65,41 @@
         <section aria-labelledby="pc-formulaire">
           <h2 id="pc-formulaire">Le formulaire de devis</h2>
           <p>Le formulaire ne transmet rien au site. Il prépare un e-mail dans votre propre messagerie (lien <em>mailto</em>), avec les informations que vous avez saisies&nbsp;: nom, adresse e-mail, téléphone si vous l’indiquez, type de prestation et message. Rien n’est envoyé tant que vous ne cliquez pas vous-même sur «&nbsp;Envoyer&nbsp;» dans votre messagerie.</p>
+          <p>Le nom, l’adresse e-mail et le message sont nécessaires pour vous répondre&nbsp;; le téléphone est facultatif.</p>
         </section>
 
         <section aria-labelledby="pc-usage">
-          <h2 id="pc-usage">Utilisation de vos informations</h2>
-          <p>Les informations que vous m’adressez par e-mail ou par téléphone servent uniquement à répondre à votre demande, à organiser la visite de votre jardin et à établir un devis. Ce traitement repose sur les mesures précontractuelles prises à votre demande (article 6.1.b du RGPD).</p>
-          <p>Elles ne sont ni vendues, ni louées, ni cédées à des tiers.</p>
+          <h2 id="pc-usage">Finalités et bases légales</h2>
+          <ul class="legal__bullets">
+            <li><strong>Répondre à votre demande, organiser la visite de votre jardin et établir un devis</strong>&nbsp;: mesures précontractuelles prises à votre demande (article&nbsp;6.1.b du RGPD).</li>
+            <li><strong>Réaliser les prestations commandées</strong>&nbsp;: exécution du contrat (article&nbsp;6.1.b du RGPD).</li>
+            <li><strong>Établir les factures et tenir la comptabilité</strong>&nbsp;: obligation légale (article&nbsp;6.1.c du RGPD).</li>
+          </ul>
+          <p>Vos informations ne servent à aucune prospection commerciale et ne sont ni vendues, ni louées, ni cédées à des tiers.</p>
+        </section>
+
+        <section aria-labelledby="pc-destinataires">
+          <h2 id="pc-destinataires">Destinataires</h2>
+          <p>Seul l’exploitant de l’activité a accès à vos informations. Elles transitent par les fournisseurs de messagerie électronique et de téléphonie utilisés pour échanger avec vous, et peuvent être communiquées à un expert-comptable ou aux administrations lorsque la loi l’exige.</p>
         </section>
 
         <section aria-labelledby="pc-duree">
           <h2 id="pc-duree">Durée de conservation</h2>
-          <p>Les échanges liés à une demande de devis sont conservés pendant <span class="is-todo">[durée à préciser]</span> à compter du dernier contact, puis supprimés.</p>
+          <ul class="legal__bullets">
+            <li><strong>Demande de devis sans suite</strong>&nbsp;: 3&nbsp;ans à compter du dernier contact, puis suppression.</li>
+            <li><strong>Clients</strong>&nbsp;: pendant toute la durée de la relation, puis 3&nbsp;ans après la dernière prestation.</li>
+            <li><strong>Devis acceptés et factures</strong>&nbsp;: 10&nbsp;ans à compter de la clôture de l’exercice, comme l’exige le Code de commerce (article&nbsp;L.&nbsp;123-22).</li>
+          </ul>
         </section>
 
         <section aria-labelledby="pc-hebergeur">
           <h2 id="pc-hebergeur">Hébergement et journaux techniques</h2>
-          <p>Le site est hébergé par <span data-bind="legal.host.name">GitHub, Inc.</span> Lors de la consultation d’une page, l’hébergeur peut enregistrer des données techniques de connexion, dont l’adresse IP, à des fins de sécurité, conformément à sa propre <a class="link link--always" href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">déclaration de confidentialité</a>.</p>
+          <p>Le site est hébergé par <span data-bind="legal.host.name">GitHub, Inc.</span>, aux États-Unis. Lors de la consultation d’une page, l’hébergeur peut enregistrer des données techniques de connexion, dont l’adresse IP, à des fins de sécurité. GitHub adhère au cadre de protection des données UE–États-Unis (<em>Data Privacy Framework</em>), qui encadre ce transfert hors de l’Union européenne. Pour en savoir plus, consultez sa <a class="link link--always" href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">déclaration de confidentialité</a>.</p>
         </section>
 
         <section aria-labelledby="pc-droits">
           <h2 id="pc-droits">Vos droits</h2>
-          <p>Vous disposez d’un droit d’accès, de rectification, d’effacement, de limitation et d’opposition sur vos données, ainsi que d’un droit à la portabilité. Pour les exercer, écrivez à <a class="link link--always" data-href="mailto" href="mailto:contact@example.com" data-bind="contact.email">contact@example.com</a>.</p>
+          <p>Vous disposez d’un droit d’accès, de rectification, d’effacement, de limitation et d’opposition sur vos données, ainsi que d’un droit à la portabilité et du droit de définir des directives sur leur sort après votre décès. Pour les exercer, écrivez à <a class="link link--always" data-href="mailto" href="mailto:contact@example.com" data-bind="contact.email">contact@example.com</a>. Une réponse vous est apportée dans un délai d’un mois.</p>
           <p>Si vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL (<a class="link link--always" href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">www.cnil.fr</a>).</p>
         </section>
 
@@ -129,6 +129,5 @@
     </div>
   </footer>
 
-  <span class="hidden" data-tw-probe></span>
 </body>
 </html>

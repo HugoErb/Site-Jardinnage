@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Mentions légales | Jardinier paysagiste indépendant à Pau</title>
-  <meta name="description" content="Mentions légales du site : éditeur, hébergement, médiation de la consommation, propriété intellectuelle et crédits.">
+  <title>Mentions légales | Axel Royer, jardinier paysagiste à Pau</title>
+  <meta name="description" content="Mentions légales du site : éditeur, hébergement, médiation de la consommation, propriété intellectuelle, crédits et droit applicable.">
   <meta name="robots" content="noindex, follow">
   <meta name="theme-color" content="#102d24">
   <meta name="color-scheme" content="light">
@@ -16,21 +16,6 @@
   <script>
     (function (d) { d.documentElement.className = d.documentElement.className.replace(/\bno-js\b/, 'js'); })(document);
   </script>
-  <style type="text/tailwindcss">
-    @theme inline {
-      --color-forest: var(--c-forest);
-      --color-forest-2: var(--c-forest-2);
-      --color-sage: var(--c-sage);
-      --color-cream: var(--c-cream);
-      --color-cream-2: var(--c-cream-2);
-      --color-lime: var(--c-lime);
-      --color-ink: var(--c-ink);
-      --color-moss: var(--c-moss);
-      --font-serif: var(--f-serif);
-      --font-sans: var(--f-sans);
-    }
-  </style>
-  <script defer src="js/vendor/tailwindcss-browser.min.js"></script>
   <script defer src="js/config.js"></script>
   <script defer src="js/main.js"></script>
 </head>
@@ -64,17 +49,21 @@
     <div class="container">
       <article class="legal__article">
         <h1 class="legal__title">Mentions légales</h1>
-        <p class="legal__intro">Conformément à la loi pour la confiance dans l’économie numérique (loi n°&nbsp;2004-575 du 21&nbsp;juin 2004), voici les informations relatives à l’éditeur et à l’hébergeur de ce site. Les éléments entre crochets sont à compléter.</p>
+        <p class="legal__intro">Conformément à l’article&nbsp;6 de la loi n°&nbsp;2004-575 du 21&nbsp;juin 2004 pour la confiance dans l’économie numérique (LCEN), voici les informations relatives à l’éditeur et à l’hébergeur de ce site.</p>
+        <p class="legal__updated">Dernière mise à jour&nbsp;: <span data-bind="legal.updated">9 octobre 2026</span></p>
 
         <section aria-labelledby="ml-editeur">
           <h2 id="ml-editeur">Éditeur du site</h2>
           <dl class="legal__list">
             <div><dt>Activité</dt><dd data-bind="business.name">Axel Royer</dd></div>
-            <div><dt>Exploitant</dt><dd data-bind="legal.ownerName">Axel Royer</dd></div>
+            <div><dt>Exploitant</dt><dd><span data-bind="legal.ownerName">Axel Royer</span> (EI)</dd></div>
             <div><dt>Statut</dt><dd data-bind="legal.status">Entrepreneur individuel (EI)</dd></div>
-            <div><dt>Adresse</dt><dd data-bind="legal.address">[Adresse postale]</dd></div>
-            <div><dt>SIRET</dt><dd data-bind="legal.siret">[Numéro SIRET]</dd></div>
-            <div data-if="legal.vat" hidden><dt>TVA intracommunautaire</dt><dd data-bind="legal.vat"></dd></div>
+            <div><dt>Adresse</dt><dd data-bind="legal.address">[À REMPLIR : adresse postale]</dd></div>
+            <div><dt>SIRET</dt><dd data-bind="legal.siret">[À REMPLIR : numéro SIRET]</dd></div>
+            <div data-if="legal.registration"><dt>Immatriculation</dt><dd data-bind="legal.registration">[À REMPLIR : immatriculation]</dd></div>
+            <div data-if="legal.vat"><dt>TVA</dt><dd data-bind="legal.vat">[À REMPLIR : TVA]</dd></div>
+            <div data-if="legal.insurance"><dt>Assurance professionnelle</dt><dd data-bind="legal.insurance">[À REMPLIR : assurance]</dd></div>
+            <div data-if="legal.sap"><dt>Services à la personne</dt><dd data-bind="legal.sap">[À REMPLIR : déclaration SAP]</dd></div>
             <div><dt>Téléphone</dt><dd><a class="link link--always" data-href="tel" href="tel:+33639980000" data-bind="contact.phone">06 39 98 00 00</a></dd></div>
             <div><dt>E-mail</dt><dd><a class="link link--always" data-href="mailto" href="mailto:contact@example.com" data-bind="contact.email">contact@example.com</a></dd></div>
           </dl>
@@ -88,15 +77,16 @@
         <section aria-labelledby="ml-hebergement">
           <h2 id="ml-hebergement">Hébergement</h2>
           <p>
-            <span data-bind="legal.host.name">GitHub, Inc.</span><br>
+            <span data-bind="legal.host.name">GitHub, Inc.</span> (service GitHub Pages)<br>
             <span data-bind="legal.host.address">88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis</span><br>
+            Téléphone&nbsp;: <span data-bind="legal.host.phone">+1 877 448 4820</span><br>
             <a class="link link--always" data-href="legal.host.url" href="https://github.com" target="_blank" rel="noopener">Site de l’hébergeur</a>
           </p>
         </section>
 
         <section aria-labelledby="ml-mediation">
           <h2 id="ml-mediation">Médiation de la consommation</h2>
-          <p>Conformément au Code de la consommation, en cas de litige non résolu à l’amiable, le client consommateur peut recourir gratuitement au médiateur de la consommation suivant&nbsp;: <span data-bind="legal.mediator.name">[Nom et coordonnées du médiateur de la consommation]</span><span data-if="legal.mediator.url" hidden> (<a class="link link--always" data-href="legal.mediator.url" target="_blank" rel="noopener">site du médiateur</a>)</span>.</p>
+          <p>Conformément aux articles L.&nbsp;612-1 et suivants du Code de la consommation, en cas de litige non résolu après une réclamation écrite adressée à l’entreprise, le client consommateur peut recourir gratuitement au médiateur de la consommation suivant&nbsp;: <span data-bind="legal.mediator.name">[À REMPLIR : nom et coordonnées du médiateur de la consommation]</span><span data-if="legal.mediator.url" hidden> (<a class="link link--always" data-href="legal.mediator.url" target="_blank" rel="noopener">site du médiateur</a>)</span>.</p>
         </section>
 
         <section aria-labelledby="ml-propriete">
@@ -107,11 +97,16 @@
         <section id="credits" aria-labelledby="credits-title">
           <h2 id="credits-title">Crédits</h2>
           <ul class="legal__bullets">
-            <li><strong>Illustrations</strong>&nbsp;: créations originales réalisées pour ce site. Elles seront remplacées par les photos des chantiers de l’entreprise.</li>
+            <li><strong>Illustrations</strong>&nbsp;: créations originales réalisées pour ce site.</li>
             <li><strong>Polices</strong>&nbsp;: Fraunces et Instrument Sans, sous licence SIL Open Font License 1.1, hébergées avec le site.</li>
             <li><strong>Icônes</strong>&nbsp;: Lucide, sous licence ISC.</li>
-            <li><strong>Bibliothèques</strong>&nbsp;: GSAP (licence standard GSAP), Lenis (MIT), Tailwind CSS (MIT), hébergées avec le site.</li>
+            <li><strong>Bibliothèques</strong>&nbsp;: GSAP (licence standard GSAP) et Lenis (MIT), hébergées avec le site.</li>
           </ul>
+        </section>
+
+        <section aria-labelledby="ml-liens">
+          <h2 id="ml-liens">Liens hypertextes</h2>
+          <p>Ce site peut contenir des liens vers d’autres sites (hébergeur, CNIL, réseaux sociaux). Leur contenu n’engage pas l’éditeur, qui n’exerce aucun contrôle sur eux.</p>
         </section>
 
         <section aria-labelledby="ml-responsabilite">
@@ -120,8 +115,13 @@
         </section>
 
         <section aria-labelledby="ml-donnees">
-          <h2 id="ml-donnees">Données personnelles</h2>
+          <h2 id="ml-donnees">Données personnelles et cookies</h2>
           <p>Ce site ne dépose aucun cookie et ne collecte aucune donnée de manière automatique. Pour en savoir plus, consultez la <a class="link link--always" href="confidentialite.html">politique de confidentialité</a>.</p>
+        </section>
+
+        <section aria-labelledby="ml-droit">
+          <h2 id="ml-droit">Droit applicable</h2>
+          <p>Les présentes mentions légales sont régies par le droit français.</p>
         </section>
       </article>
     </div>
@@ -145,6 +145,5 @@
     </div>
   </footer>
 
-  <span class="hidden" data-tw-probe></span>
 </body>
 </html>

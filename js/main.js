@@ -32,6 +32,9 @@
     return false;
   }
 
+  /* « [Numéro SIRET] » : valeur d'exemple encore à compléter */
+  function isTodo(value) { return /^\[.*\]$/.test(String(value).trim()); }
+
   /* « 06 12 34 56 78 » → « tel:+33612345678 » */
   function toTelHref(phone) {
     var digits = String(phone || '').replace(/[^\d+]/g, '');
@@ -48,21 +51,6 @@
     fine: window.matchMedia('(hover: hover) and (pointer: fine)'),
     desktop: window.matchMedia('(min-width: 1024px)')
   };
-
-  /* Attend que Tailwind ait compilé ses utilitaires (sonde .hidden). */
-  function tailwindReady(timeout) {
-    var probe = $('[data-tw-probe]');
-    if (!probe) return Promise.resolve(false);
-    var limit = timeout || 1500;
-    return new Promise(function (resolve) {
-      var start = performance.now();
-      (function check() {
-        if (getComputedStyle(probe).display === 'none') return resolve(true);
-        if (performance.now() - start > limit) return resolve(false);
-        requestAnimationFrame(check);
-      })();
-    });
-  }
 
   /* Polices prêtes (au plus tard après 1,2 s, pour ne jamais bloquer). */
   function fontsReady() {
@@ -107,7 +95,7 @@
       var v = getPath(cfg, el.dataset.bind);
       el.textContent = isEmpty(v) ? '' : String(v);
       /* Valeur encore entre crochets = information à compléter (surlignée) */
-      el.classList.toggle('is-todo', /^\[.*\]$/.test(el.textContent.trim()));
+      el.classList.toggle('is-todo', isTodo(el.textContent));
     });
 
     $$('[data-href]').forEach(function (el) {
@@ -134,38 +122,66 @@
       else el.hidden = empty;
     });
 
-    var demo = !!getPath(cfg, 'demo.illustrationLabels');
-    $$('[data-demo-label]').forEach(function (el) { el.hidden = !demo; });
-
     $$('[data-year]').forEach(function (el) { el.textContent = String(new Date().getFullYear()); });
   }
 
-  /* Données structurées : uniquement si activées et avec les vraies valeurs. */
+  /* Données structurées : uniquement si activées. Les valeurs encore
+     entre crochets (à compléter) sont ignorées. */
   function injectJsonLd(cfg) {
     if (getPath(cfg, 'seo.structuredData') !== true) return;
-    var tel = toTelHref(getPath(cfg, 'contact.phone')).replace('tel:', '');
-    var siteUrl = getPath(cfg, 'seo.siteUrl');
-    var areas = [getPath(cfg, 'zone.city')].concat(getPath(cfg, 'zone.communes') || [])
-      .filter(function (name) { return !isEmpty(name); })
+    function val(path) {
+      var v = getPath(cfg, path);
+      return isEmpty(v) || isTodo(v) ? undefined : String(v).trim();
+    }
+    var siteUrl = val('seo.siteUrl') || location.href.split('#')[0];
+    var tel = toTelHref(val('contact.phone')).replace('tel:', '');
+    var areas = [val('zone.city')].concat(getPath(cfg, 'zone.communes') || [])
+      .filter(function (name) { return !isEmpty(name) && !isTodo(name); })
       .map(function (name) { return { '@type': 'City', name: String(name) }; });
     var social = getPath(cfg, 'social') || {};
     var sameAs = Object.keys(social).map(function (k) { return social[k]; }).filter(function (v) { return !isEmpty(v); });
+    var services = $$('.services__all-list li').map(function (li) { return li.textContent.trim(); });
+    var owner = val('legal.ownerName');
 
-    var data = {
-      '@context': 'https://schema.org',
+    var business = {
       '@type': 'LocalBusiness',
-      name: getPath(cfg, 'business.name'),
-      description: getPath(cfg, 'business.description'),
+      '@id': siteUrl + '#entreprise',
+      name: val('business.name'),
+      description: val('business.description'),
+      url: siteUrl,
+      image: new URL('assets/images/og-image.jpg', siteUrl).href,
+      logo: new URL('assets/images/apple-touch-icon.png', siteUrl).href,
       telephone: tel || undefined,
-      email: getPath(cfg, 'contact.email') || undefined,
-      url: siteUrl || location.href,
-      image: siteUrl ? new URL('assets/images/og-image.jpg', siteUrl).href : undefined,
+      email: val('contact.email'),
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: val('legal.address'),
+        addressLocality: val('zone.city'),
+        addressCountry: 'FR'
+      },
       areaServed: areas,
+      founder: owner ? { '@type': 'Person', name: owner } : undefined,
+      knowsAbout: services,
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Prestations de jardinage',
+        itemListElement: services.map(function (name) {
+          return { '@type': 'Offer', itemOffered: { '@type': 'Service', name: name } };
+        })
+      },
       sameAs: sameAs.length ? sameAs : undefined
+    };
+    var site = {
+      '@type': 'WebSite',
+      '@id': siteUrl + '#site',
+      url: siteUrl,
+      name: val('business.name'),
+      inLanguage: 'fr-FR',
+      publisher: { '@id': business['@id'] }
     };
     var script = doc.createElement('script');
     script.type = 'application/ld+json';
-    script.textContent = JSON.stringify(data);
+    script.textContent = JSON.stringify({ '@context': 'https://schema.org', '@graph': [site, business] });
     doc.head.appendChild(script);
   }
 
@@ -458,15 +474,6 @@
         .fromTo(img, { scale: 1.16 }, { scale: 1, duration: 1.6, ease: 'expo.out' }, 0.1);
     });
 
-    gsap.matchMedia().add('(min-width: 640px)', function () {
-      $$('[data-parallax]').forEach(function (img) {
-        gsap.fromTo(img, { yPercent: -6 }, {
-          yPercent: 6, ease: 'none',
-          scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true }
-        });
-      });
-    });
-
     ScrollTrigger.batch('[data-reveal="up"], [data-reveal="line"]', {
       start: 'top 92%',
       once: true,
@@ -492,139 +499,8 @@
   }
 
   /* ===================================================================
-     8. Comparateur avant / après
+     8. Méthode : la tige qui pousse au fil des étapes
      =================================================================== */
-  function createBeforeAfter(root) {
-    var frame = $('[data-ba-frame]', root);
-    var range = $('[data-ba-range]', root);
-    if (!frame || !range) return;
-    var dragging = false;
-    var touched = false;
-
-    function set(value, fromRange) {
-      var pos = clamp(value, 0, 100);
-      frame.style.setProperty('--pos', pos.toFixed(2) + '%');
-      if (!fromRange) range.value = String(Math.round(pos));
-      range.setAttribute('aria-valuetext', Math.round(pos) + ' % avant, ' + (100 - Math.round(pos)) + ' % après');
-    }
-
-    function fromEvent(event) {
-      var r = frame.getBoundingClientRect();
-      return (event.clientX - r.left) / r.width * 100;
-    }
-
-    frame.addEventListener('pointerdown', function (event) {
-      touched = true;
-      dragging = true;
-      if (event.pointerType === 'mouse' && frame.setPointerCapture) frame.setPointerCapture(event.pointerId);
-      set(fromEvent(event));
-    });
-    frame.addEventListener('pointermove', function (event) {
-      if (dragging) set(fromEvent(event));
-    });
-    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(function (type) {
-      frame.addEventListener(type, function () { dragging = false; });
-    });
-    range.addEventListener('input', function () {
-      touched = true;
-      set(Number(range.value), true);
-    });
-    set(50);
-
-    /* Indice de manipulation à la première apparition (annulé au premier contact) */
-    if (media.reduce.matches || !('IntersectionObserver' in window)) return;
-    var io = new IntersectionObserver(function (entries) {
-      if (!entries.some(function (e) { return e.isIntersecting; })) return;
-      io.disconnect();
-      var keys = [50, 28, 72, 50];
-      var segment = 0;
-      var start = null;
-      var duration = 700;
-      function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
-      function step(now) {
-        if (touched) return;
-        if (start === null) start = now;
-        var t = Math.min(1, (now - start) / duration);
-        set(keys[segment] + (keys[segment + 1] - keys[segment]) * ease(t));
-        if (t < 1) { requestAnimationFrame(step); return; }
-        segment += 1;
-        start = null;
-        if (segment < keys.length - 1) requestAnimationFrame(step);
-      }
-      setTimeout(function () { requestAnimationFrame(step); }, 400);
-    }, { threshold: 0.6 });
-    io.observe(frame);
-  }
-
-  /* ===================================================================
-     9. Visionneuse de la galerie
-     =================================================================== */
-  function createLightbox(lenis) {
-    var dialog = $('[data-lightbox]');
-    var items = $$('[data-gallery-item]');
-    if (!dialog || !items.length || typeof dialog.showModal !== 'function') return;
-    var img = $('[data-lightbox-img]', dialog);
-    var caption = $('[data-lightbox-caption]', dialog);
-    var count = $('[data-lightbox-count]', dialog);
-    var index = 0;
-    var opener = null;
-    var startX = null;
-
-    function show(i) {
-      index = (i + items.length) % items.length;
-      var item = items[index];
-      var thumb = $('img', item);
-      img.src = item.dataset.full;
-      img.alt = thumb ? (thumb.dataset.alt || thumb.alt) : '';
-      caption.textContent = ($('.gallery__title', item) || {}).textContent || '';
-      count.textContent = (index + 1) + ' / ' + items.length;
-    }
-
-    items.forEach(function (item, i) {
-      item.addEventListener('click', function () {
-        opener = item;
-        show(i);
-        dialog.showModal();
-        if (lenis) lenis.stop();
-        root.classList.add('scroll-locked');
-      });
-    });
-
-    $('[data-lightbox-prev]', dialog).addEventListener('click', function () { show(index - 1); });
-    $('[data-lightbox-next]', dialog).addEventListener('click', function () { show(index + 1); });
-    $('[data-lightbox-close]', dialog).addEventListener('click', function () { dialog.close(); });
-    dialog.addEventListener('keydown', function (event) {
-      if (event.key === 'ArrowLeft') { event.preventDefault(); show(index - 1); }
-      if (event.key === 'ArrowRight') { event.preventDefault(); show(index + 1); }
-    });
-    dialog.addEventListener('click', function (event) {
-      if (event.target === dialog) dialog.close();
-    });
-    dialog.addEventListener('pointerdown', function (event) { startX = event.clientX; });
-    dialog.addEventListener('pointerup', function (event) {
-      if (startX === null) return;
-      var dx = event.clientX - startX;
-      startX = null;
-      if (Math.abs(dx) > 50) show(index + (dx < 0 ? 1 : -1));
-    });
-    dialog.addEventListener('close', function () {
-      root.classList.remove('scroll-locked');
-      if (lenis) lenis.start();
-      if (opener) opener.focus({ preventScroll: true });
-    });
-  }
-
-  /* ===================================================================
-     10. Méthode : la tige qui pousse au fil des étapes
-     =================================================================== */
-  function seeded(seed) {
-    var state = seed >>> 0;
-    return function () {
-      state = (Math.imul(state, 1664525) + 1013904223) >>> 0;
-      return state / 4294967296;
-    };
-  }
-
   function initProcessStem(gsap, ScrollTrigger) {
     var wrap = $('[data-process]');
     if (!wrap) return;
@@ -745,112 +621,7 @@
   }
 
   /* ===================================================================
-     11. Zone d'intervention : cernes de croissance et communes
-     =================================================================== */
-  function initZoneRings(cfg) {
-    var wrap = $('[data-rings]');
-    if (!wrap) return null;
-    var svg = $('[data-rings-svg]', wrap);
-    var labels = $('[data-rings-labels]', wrap);
-    var ns = 'http://www.w3.org/2000/svg';
-    var rnd = seeded(5);
-    svg.textContent = '';
-    [292, 238, 182, 126, 72].forEach(function (radius) {
-      var p1 = rnd() * 6.28;
-      var p2 = rnd() * 6.28;
-      var d = '';
-      for (var k = 0; k <= 96; k++) {
-        var a = k / 96 * Math.PI * 2;
-        var r = radius * (1 + 0.024 * Math.sin(a * 3 + p1) + 0.014 * Math.sin(a * 7 + p2));
-        d += (k ? 'L' : 'M') + (300 + Math.cos(a) * r).toFixed(1) + ' ' + (300 + Math.sin(a) * r).toFixed(1);
-      }
-      var path = doc.createElementNS(ns, 'path');
-      path.setAttribute('d', d + 'Z');
-      path.setAttribute('class', 'rings__ring');
-      svg.appendChild(path);
-    });
-
-    var communes = (getPath(cfg, 'zone.communes') || []).filter(function (c) { return !isEmpty(c); });
-    var tracks = communes.length <= 6 ? [212] : [176, 266];
-    labels.textContent = '';
-    wrap.classList.toggle('rings--dense', communes.length > 6);
-    var items = communes.map(function (name, i) {
-      var two = tracks.length === 2;
-      var track = two ? i % 2 : 0;
-      var perTrack = two ? Math.ceil(communes.length / 2) : communes.length;
-      var index = two ? Math.floor(i / 2) : i;
-      var el = doc.createElement('span');
-      el.className = 'tag rings__label';
-      el.textContent = String(name);
-      labels.appendChild(el);
-      return { el: el, r: tracks[track], a: -Math.PI / 2 + 0.42 + (index / perTrack) * Math.PI * 2 + (track ? Math.PI / perTrack : 0) };
-    });
-
-    function place(item) {
-      item.el.style.left = (50 + Math.cos(item.a) * item.r / 6).toFixed(2) + '%';
-      item.el.style.top = (50 + Math.sin(item.a) * item.r / 6).toFixed(2) + '%';
-    }
-
-    /* Écarte les étiquettes qui se chevauchent, le long de leurs cernes.
-       Boîtes calculées à partir des dimensions (indépendantes des animations). */
-    function relax() {
-      items.forEach(place);
-      var W = labels.offsetWidth;
-      var H = labels.offsetHeight;
-      if (!W || getComputedStyle(labels).display === 'none') return;
-      var sizes = items.map(function (it) { return [it.el.offsetWidth, it.el.offsetHeight]; });
-      function box(k) {
-        var cx = W * (0.5 + Math.cos(items[k].a) * items[k].r / 600);
-        var cy = H * (0.5 + Math.sin(items[k].a) * items[k].r / 600);
-        return [cx - sizes[k][0] / 2, cy - sizes[k][1] / 2, cx + sizes[k][0] / 2, cy + sizes[k][1] / 2];
-      }
-      for (var iter = 0; iter < 120; iter++) {
-        var moved = false;
-        for (var i = 0; i < items.length; i++) {
-          for (var j = i + 1; j < items.length; j++) {
-            var A = box(i), B = box(j);
-            if (A[0] < B[2] + 6 && B[0] < A[2] + 6 && A[1] < B[3] + 3 && B[1] < A[3] + 3) {
-              var diff = Math.atan2(Math.sin(items[j].a - items[i].a), Math.cos(items[j].a - items[i].a));
-              var push = diff >= 0 ? 0.03 : -0.03;
-              items[i].a -= push;
-              items[j].a += push;
-              moved = true;
-            }
-          }
-        }
-        if (!moved) break;
-      }
-      items.forEach(place);
-    }
-
-    relax();
-    fontsReady().then(relax);
-    if ('ResizeObserver' in window && items.length) {
-      var timer;
-      var lastWidth = wrap.offsetWidth;
-      new ResizeObserver(function () {
-        if (wrap.offsetWidth === lastWidth) return;
-        lastWidth = wrap.offsetWidth;
-        clearTimeout(timer);
-        timer = setTimeout(relax, 120);
-      }).observe(wrap);
-    }
-    return wrap;
-  }
-
-  function animateZone(gsap) {
-    var wrap = $('[data-rings]');
-    if (!wrap) return;
-    var trigger = { trigger: wrap, start: 'top 78%', once: true };
-    gsap.from($$('.rings__ring', wrap).reverse(), {
-      scale: 0.55, opacity: 0, svgOrigin: '300 300', duration: 1.3, stagger: 0.09, ease: 'expo.out', scrollTrigger: trigger
-    });
-    gsap.from($('.rings__center', wrap), { y: -24, opacity: 0, duration: 1, delay: 0.25, ease: 'back.out(2)', scrollTrigger: trigger });
-    gsap.from($$('.rings__label', wrap), { opacity: 0, scale: 0.8, duration: 0.7, stagger: 0.06, delay: 0.45, ease: 'expo.out', scrollTrigger: trigger });
-  }
-
-  /* ===================================================================
-     12. Formulaire de devis (mailto) : rien n'est envoyé par le site
+     9. Formulaire de devis (mailto) : rien n'est envoyé par le site
      =================================================================== */
   function buildMailto(data, cfg) {
     var to = String(getPath(cfg, 'contact.email') || '').trim();
@@ -1022,7 +793,7 @@
   }
 
   /* ===================================================================
-     13. Contact rapide mobile
+     10. Contact rapide mobile
      =================================================================== */
   function initMobileDock() {
     var dock = $('[data-dock]');
@@ -1080,9 +851,6 @@
     initHeader();
     var menu = initMobileMenu(lenis);
     initAnchors(lenis, menu);
-    $$('[data-ba]').forEach(createBeforeAfter);
-    createLightbox(lenis);
-    initZoneRings(cfg);
     initContactForm(cfg);
     initMobileDock();
 
@@ -1097,12 +865,11 @@
     ScrollTrigger.config({ ignoreMobileResize: true });
     if (lateStart) root.classList.add('intro-done');
     else initHeroIntro(gsap, SplitText);
-    tailwindReady().then(fontsReady).then(function () {
+    fontsReady().then(function () {
       initHeroScroll(gsap);
       initReveals(gsap, ScrollTrigger, SplitText);
       initServicesDepth(gsap);
       initProcessStem(gsap, ScrollTrigger);
-      animateZone(gsap);
       ScrollTrigger.refresh();
       handleInitialHash(lenis);
     });
