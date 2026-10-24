@@ -128,6 +128,8 @@ Le site n’a pas de serveur : le formulaire **n’envoie rien lui-même**. Quan
 
 Tous les chemins sont relatifs : le site fonctionne dans un sous-dossier comme sur un domaine personnalisé. Pour un **domaine personnalisé**, renseignez-le dans Settings → Pages (GitHub crée le fichier `CNAME`), puis mettez à jour `seo.siteUrl` et les balises `canonical` / `og:*` de `index.html`.
 
+> Exception : `404.html` utilise des chemins absolus (`/Site-Jardinnage/…`), car GitHub Pages la sert à l’adresse demandée, parfois dans un sous-dossier inexistant. Avec un domaine personnalisé, remplacez `/Site-Jardinnage/` par `/` dans ce fichier.
+
 > Sur une adresse de type `utilisateur.github.io/depot/`, les moteurs de recherche ne lisent pas le `robots.txt` du dépôt (il doit se trouver à la racine du domaine) : déclarez directement `sitemap.xml` dans la Google Search Console. Avec un domaine personnalisé, `robots.txt` et `sitemap.xml` sont lus automatiquement.
 
 ---

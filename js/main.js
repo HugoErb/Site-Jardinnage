@@ -786,7 +786,7 @@
     var text = {
       name: 'Indiquez votre nom.',
       emailMissing: 'Indiquez votre adresse e-mail.',
-      emailInvalid: 'Cette adresse e-mail semble incomplète (exemple : nom@domaine.fr).',
+      emailInvalid: 'Cette adresse e-mail semble incomplète (exemple : nom@domaine.fr).',
       phone: 'Ce numéro semble incomplet.',
       message: 'Décrivez brièvement votre besoin.'
     };
@@ -834,9 +834,9 @@
 
     function renderStatus(mail, long) {
       status.textContent = '';
-      status.appendChild(el('p', '', 'Votre messagerie devrait s’ouvrir avec votre demande pré-remplie. Pensez à cliquer sur « Envoyer » : je ne la recevrai qu’à ce moment-là.'));
-      if (long) status.appendChild(el('p', '', 'Votre message est long : si votre messagerie le coupe, utilisez « Copier ma demande ».'));
-      status.appendChild(el('p', '', 'Rien ne s’est ouvert ? Copiez votre demande pour la coller dans votre messagerie, ou appelez-moi.'));
+      status.appendChild(el('p', '', 'Votre messagerie devrait s’ouvrir avec votre demande pré-remplie. Pensez à cliquer sur « Envoyer » : je ne la recevrai qu’à ce moment-là.'));
+      if (long) status.appendChild(el('p', '', 'Votre message est long : si votre messagerie le coupe, utilisez « Copier ma demande ».'));
+      status.appendChild(el('p', '', 'Rien ne s’est ouvert ? Copiez votre demande pour la coller dans votre messagerie, ou appelez-moi.'));
       var actions = el('div', 'quote-form__status-actions');
       var copy = el('button', 'btn btn--sm');
       copy.type = 'button';
@@ -857,7 +857,7 @@
           use.setAttribute('href', '#i-check');
           setTimeout(function () { label.textContent = 'Copier ma demande'; use.setAttribute('href', '#i-copy'); }, 2600);
         }, function () {
-          label.textContent = 'Copie impossible : sélectionnez le texte du formulaire';
+          label.textContent = 'Copie impossible : sélectionnez le texte du formulaire';
         });
       });
       actions.appendChild(copy);
@@ -902,17 +902,18 @@
   function initMobileDock() {
     var dock = $('[data-dock]');
     var hero = $('.hero');
-    var contact = $('#contact');
     var header = $('[data-header]');
     if (!dock) return;
-    var contactVisible = false;
+    /* Masqué là où les mêmes boutons sont déjà affichés (contact, pied de page) */
+    var covered = $$('#contact, .site-footer');
+    var coveredVisible = [];
     var ticking = false;
 
     function update() {
       ticking = false;
       var past = window.scrollY > (hero ? hero.offsetHeight * 0.6 : 300);
       var menuOpen = header && header.classList.contains('menu-open');
-      var visible = past && !contactVisible && !menuOpen;
+      var visible = past && coveredVisible.length === 0 && !menuOpen;
       dock.classList.toggle('is-visible', visible);
       dock.inert = !visible;
     }
@@ -921,11 +922,16 @@
       ticking = true;
       requestAnimationFrame(update);
     }
-    if (contact && 'IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        contactVisible = entries[0].isIntersecting;
+    if (covered.length && 'IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var i = coveredVisible.indexOf(entry.target);
+          if (entry.isIntersecting && i === -1) coveredVisible.push(entry.target);
+          else if (!entry.isIntersecting && i !== -1) coveredVisible.splice(i, 1);
+        });
         request();
-      }, { rootMargin: '0px 0px -20% 0px' }).observe(contact);
+      }, { rootMargin: '0px 0px -20% 0px' });
+      covered.forEach(function (el) { observer.observe(el); });
     }
     window.addEventListener('scroll', request, { passive: true });
     doc.addEventListener('menu:change', request);
