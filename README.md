@@ -55,7 +55,7 @@ Ouvrez **`js/config.js`** et remplacez les valeurs entre guillemets. Le site se 
 |---|---|---|
 | `business.name` | Nom de l’activité (logo, pied de page, e-mails) | `"Jardins Martin"` |
 | `business.description` | Description courte (données structurées) | |
-| `person.firstName` | Prénom (« Bonjour, je suis… », « Appeler… ») | `"Julien"` |
+| `person.firstName` | Prénom (« Appeler… », formule d'appel de l'e-mail de devis) | `"Julien"` |
 | `contact.phone` | Téléphone, format libre | `"06 12 34 56 78"` |
 | `contact.email` | Adresse qui reçoit les demandes de devis | `"contact@jardins-martin.fr"` |
 | `zone.city` | Commune principale | `"Pau"` |

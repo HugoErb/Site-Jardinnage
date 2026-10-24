@@ -413,8 +413,13 @@
     var depth = function (el) { return parseFloat(el.dataset.depth) || 0; };
     var mm = gsap.matchMedia();
 
-    mm.add('(min-width: 1024px)', function () {
+    /* Épinglage seulement si le contenu tient dans la fenêtre : sinon le bas
+       du hero serait recouvert par la section suivante (fenêtre très basse). */
+    mm.add('(min-width: 1024px) and (min-height: 540px)', function () {
       window.ScrollTrigger.create({ trigger: hero, start: 'top top', end: 'bottom top', pin: true, pinSpacing: false });
+    });
+
+    mm.add('(min-width: 1024px)', function () {
       gsap.to(mediaEl, { scale: 1.06, ease: 'none', scrollTrigger: range });
       planes.forEach(function (plane) {
         gsap.to(plane, { yPercent: 1 + depth(plane) * 9, ease: 'none', scrollTrigger: range });
